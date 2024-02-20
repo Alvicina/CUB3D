@@ -6,7 +6,7 @@
 /*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 10:28:39 by alvicina          #+#    #+#             */
-/*   Updated: 2024/02/20 12:08:56 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/02/20 18:40:54 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,6 @@ static int	get_map(t_data *data)
 		j++;
 	}
 	data->map_only[j] = 0;
-	/*i = 0;
-	while (data->map_only[i])
-	{
-		ft_printf("%s\n", data->map_only[i]);
-		i++;
-	}*/
 	return (EXIT_SUCCESS);
 }
 
@@ -56,12 +50,6 @@ static int	get_textures(t_data *data)
 		i++;
 	}
 	data->textures[i] = 0;
-	/*i = 0;
-	while (data->textures[i])
-	{
-		ft_printf("%s\n", data->textures[i]);
-		i++;
-	}*/
 	return (EXIT_SUCCESS);
 }
 
@@ -102,6 +90,11 @@ int	split_map_specifications(t_data *data)
 		ft_free_pointer_array(data->textures);
 		return (perror("Malloc error when splitting specs"), EXIT_FAILURE);
 	}
-	ft_free_pointer_array(data->map_spec);
+	if (specs_checker(data))
+	{
+		ft_free_pointer_array(data->textures);
+		ft_free_pointer_array(data->map_only);
+		return (EXIT_FAILURE);
+	}
 	return (EXIT_SUCCESS);
 }

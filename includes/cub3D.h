@@ -6,7 +6,7 @@
 /*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:05:05 by alvicina          #+#    #+#             */
-/*   Updated: 2024/02/20 11:54:36 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/02/20 17:44:54 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ int	is_map_line(char *set, char *line_to_check);
 // modulo split_map_specifications
 int	split_map_specifications(t_data *data);
 
+// specifications_checker
+int	specs_checker(t_data *data);
 
 
 #endif
