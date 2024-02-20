@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_copy_file.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:51:10 by alvicina          #+#    #+#             */
-/*   Updated: 2024/02/19 16:41:33 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/02/20 12:13:04 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@ static int	check_arg_name(char *argv)
 	while (argv[i])
 		i++;
 	i = i - 1;
-	if (argv[i] != 'b' || argv[i - 1] != 'u' || argv[i - 2] != 'c' || argv[i - 3] != '.')
-		return (ft_message("Incorrect file name\n"), 1);
-	return (0);
+	if (argv[i] != 'b' || argv[i - 1] != 'u' || argv[i - 2] != 'c'
+		|| argv[i - 3] != '.')
+		return (ft_message("Incorrect file name\n"), EXIT_FAILURE);
+	return (EXIT_SUCCESS);
 }
 
 static int	read_file(int fd)
@@ -72,35 +73,34 @@ static char	*get_file(char *argv)
 
 	fd = open(argv, O_RDONLY);
 	if (fd == -1)
-		return ((ft_message("Could not open file"), NULL));
+		return ((perror("Could not open file"), NULL));
 	size = read_file(fd);
 	if (size == -1)
-		return ((ft_message("Could not read file"), NULL));
+		return ((perror("Could not read file"), NULL));
 	file = copy_file(argv, size);
 	if (file == NULL)
-		return ((ft_message("Could not copy file"), NULL));
+		return ((perror("Could not copy file"), NULL));
 	return (file);
 }
 
 int	main(int argc, char **argv)
 {
 	t_data	data;
-	
+
 	if (check_number_args(argc))
-		return (1);
+		return (EXIT_FAILURE);
 	if (check_arg_name(argv[1]))
-		return (1);
+		return (EXIT_FAILURE);
 	data.file = get_file(argv[1]);
 	if (data.file == NULL)
-		return (1);
+		return (EXIT_FAILURE);
 	data.file = replace_chars(data.file, "\t\v\f\r", ' ');
-	if (!get_data(&data))
+	if (get_data(&data))
 	{
 		ft_free_pointer_array(data.map_spec);
-		return (1);
+		return (EXIT_FAILURE);
 	}
-	ft_free_pointer_array(data.map_spec);
-	// hay que liberar el data.file
-	// hay que liberar el split
-	return (0);
+	ft_free_pointer_array(data.textures);
+	ft_free_pointer_array(data.map_only);
+	return (EXIT_SUCCESS);
 }

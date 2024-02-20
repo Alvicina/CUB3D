@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   getter_data.c                                      :+:      :+:    :+:   */
+/*   check_map_position.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:50:34 by alvicina          #+#    #+#             */
-/*   Updated: 2024/02/19 16:33:35 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/02/20 11:49:51 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 
-static int	is_map_line(char *set, char *line_to_check)
+int	is_map_line(char *set, char *line_to_check)
 {
 	size_t	i;
 	size_t	j;
@@ -38,7 +38,7 @@ static int	loop_for_map_pos(t_data *data, char *set, size_t count)
 {
 	size_t	i;
 	size_t	j;
-	
+
 	i = 0;
 	while (data->map_spec[i])
 	{
@@ -48,31 +48,31 @@ static int	loop_for_map_pos(t_data *data, char *set, size_t count)
 		while (data->map_spec[i] && is_map_line(set, data->map_spec[i]))
 		{
 			if (i < 6)
-				return (0);
+				return (EXIT_FAILURE);
 			i++;
 			if (i == count)
-				return (1);
+				return (EXIT_SUCCESS);
 		}
 		i++;
 	}
-	return (0);
+	return (EXIT_FAILURE);
 }
 
 static int	check_map_position(t_data *data)
 {
 	char	*set;
 	size_t	count;
-	
+
 	set = "10NSEW";
 	count = 0;
 	while (data->map_spec[count])
 		count++;
-	if (loop_for_map_pos(data, set, count))
-		return (1);
-	return (0);
+	if (!loop_for_map_pos(data, set, count))
+		return (EXIT_SUCCESS);
+	return (EXIT_FAILURE);
 }
 
-char	**get_data(t_data *data)
+int	get_data(t_data *data)
 {
 	size_t	i;
 
@@ -81,10 +81,11 @@ char	**get_data(t_data *data)
 	if (data->map_spec == NULL)
 	{
 		free(data->file);
-		return (ft_message("Split malloc error, could not check map"), NULL);
+		return (perror("Split malloc error, could not check map"), EXIT_FAILURE);
 	}
 	free(data->file);
-	if (!check_map_position(data))
-		return (ft_message("Error\n"), ft_message("Map not in last position\n"), NULL);
-	return (data->map_spec);
+	if (check_map_position(data))
+		return (ft_message("Error\n"),
+			ft_message("Map not in last position\n"), EXIT_FAILURE);
+	return (split_map_specifications(data));
 }

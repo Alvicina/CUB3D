@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_copy_file_map_position.c                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:49:28 by alvicina          #+#    #+#             */
-/*   Updated: 2024/02/19 16:37:47 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/02/20 11:21:52 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ int	check_number_args(int argc)
 			ft_message("Map not found, please intro map\n");
 		else if (argc > 2)
 			ft_message("Incorrect number of arguments\n");
-		return (1);
+		return (EXIT_FAILURE);
 	}
-	return (0);
+	return (EXIT_SUCCESS);
 }
 
 void	ft_message(char *str)
