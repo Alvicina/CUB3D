@@ -6,7 +6,7 @@
 /*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 19:03:29 by alvicina          #+#    #+#             */
-/*   Updated: 2024/02/21 12:40:44 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/02/21 13:05:51 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,12 @@ int	is_color_valid(char *str)
 	size_t	i;
 	size_t	j;
 	size_t	flag;
+	int		num_atoi;
 	char	*num;
 
 	i = 0;
 	flag = 0;
+	num_atoi = 0;
 	while (str[i])
 	{
 		if (str[i] != ' ' && str[i] != ',' && !(str[i] >= 48 && str[i] <= 57))
@@ -31,19 +33,22 @@ int	is_color_valid(char *str)
 	j = 0;
 	while (str[i])
 	{
-		ft_printf("hola\n");
 		while (str[i] == ' ' || str[i] == ',')
 			i++;
-		ft_printf("hola2\n");
 		j = i;
 		while (str[j] >= 48 && str[j] <= 57)
 			j++;
-		ft_printf("hola3\n");
 		flag++;
+		if (flag > 3)
+			return (EXIT_FAILURE);
 		num = ft_substr(str, i, j - i);
 		if (num == NULL)
 			return (perror(0), EXIT_FAILURE);
+		num_atoi = ft_atoi(num);
+		if (num_atoi > 255)
+			return (EXIT_FAILURE);
 		ft_printf("%s\n", num);
+		free(num);
 		i = j;
 	}
 	if (flag != 3)
@@ -88,7 +93,6 @@ static int	find_texture_path_for_valid(char *str)
 	is_white_space(&str);
 	if (!str)
 		return (EXIT_FAILURE);
-	//ft_printf("%s\n", str);
 	if (check_path(str))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
