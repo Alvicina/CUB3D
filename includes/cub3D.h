@@ -6,7 +6,7 @@
 /*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:05:05 by alvicina          #+#    #+#             */
-/*   Updated: 2024/02/21 11:07:08 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/02/21 13:22:07 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ int	specs_checker(t_data *data);
 // modulo specifications_checker_utils
 int		spec_valid_check(t_data *data);
 void	is_white_space(char **str);
+
+// modulo color_validation
+int	check_colors(char *str);
 
 
 #endif

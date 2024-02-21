@@ -6,7 +6,7 @@
 #    By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/15 16:37:55 by alvicina          #+#    #+#              #
-#    Updated: 2024/02/21 13:09:22 by alvicina         ###   ########.fr        #
+#    Updated: 2024/02/21 13:22:36 by alvicina         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ HEADER      = $(addprefix $(HEADER_DIR), $(HEADER_SRCS))
 
 MPATH_SRCS  = main_copy_file.c utils_copy_file_map_position.c check_map_position.c \
 			  split_map_specifications.c specifications_checker.c specifications_checker_utils.c \
+			  color_validation.c \
 
 MPATH_DIR   = mandatory/
 MPATH       = $(addprefix $(MPATH_DIR), $(MPATH_SRCS))
