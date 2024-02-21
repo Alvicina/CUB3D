@@ -6,7 +6,7 @@
 /*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 17:36:27 by alvicina          #+#    #+#             */
-/*   Updated: 2024/02/20 19:04:53 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/02/21 10:34:27 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,21 @@
 
 static int	checker_name(char *str)
 {
-		if (!ft_strncmp(str, "NO", 2))
-			return (EXIT_SUCCESS);
-		else if (!ft_strncmp(str, "SO", 2))
-			return (EXIT_SUCCESS);
-		else if (!ft_strncmp(str, "WE", 2))
-			return (EXIT_SUCCESS);
-		else if (!ft_strncmp(str, "EA", 2))
-			return (EXIT_SUCCESS);
-		else if (!ft_strncmp(str, "F", 1))
-			return (EXIT_SUCCESS);
-		else if (!ft_strncmp(str, "C", 1))
-			return (EXIT_SUCCESS);
-		else
-			return (EXIT_FAILURE);
+	is_white_space(&str);
+	if (!ft_strncmp(str, "NO", 2))
+		return (EXIT_SUCCESS);
+	else if (!ft_strncmp(str, "SO", 2))
+		return (EXIT_SUCCESS);
+	else if (!ft_strncmp(str, "WE", 2))
+		return (EXIT_SUCCESS);
+	else if (!ft_strncmp(str, "EA", 2))
+		return (EXIT_SUCCESS);
+	else if (!ft_strncmp(str, "F", 1))
+		return (EXIT_SUCCESS);
+	else if (!ft_strncmp(str, "C", 1))
+		return (EXIT_SUCCESS);
+	else
+		return (EXIT_FAILURE);
 }
 
 static int	spec_name_check(t_data *data)
