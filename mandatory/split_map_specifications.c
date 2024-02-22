@@ -6,7 +6,7 @@
 /*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 10:28:39 by alvicina          #+#    #+#             */
-/*   Updated: 2024/02/22 13:06:05 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/02/22 15:50:44 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static int	get_map(t_data *data)
 		data->map_only[j] = ft_strdup(data->map_spec[i]);
 		if (data->map_only[j] == NULL)
 			return (EXIT_FAILURE);
-		printf("%s\n", data->map_only[j]);
+		//printf("%s\n", data->map_only[j]);
 		i++;
 		j++;
 	}
@@ -48,7 +48,7 @@ static int	get_textures(t_data *data)
 		data->textures[i] = ft_strdup(data->map_spec[i]);
 		if (data->textures[i] == NULL)
 			return (EXIT_FAILURE);
-		printf("%s\n", data->textures[i]);
+		//printf("%s\n", data->textures[i]);
 		i++;
 	}
 	data->textures[i] = 0;
@@ -58,38 +58,28 @@ static int	get_textures(t_data *data)
 static int	alloc_memory_for_specs(t_data *data)
 {
 	size_t	count_map_lines;
-	size_t	count_textures;
 	char	*set;
 	size_t	i;
-	size_t	j;
 	
 	set = "10N SEW";
-	count_textures = 0;
 	count_map_lines = 0;
 	i = 0;
-	j = 0;
-	
 	while (data->map_spec[i])
 	{
-		j = 0;
-		while (data->map_spec[i][j] && data->map_spec[i][j] == ' ')
-			j++;
-		if (data->map_spec[i][j] && !is_map_line(set, &data->map_spec[i][j]))
-			count_textures++;
-		i++;
+		if (data->map_spec[i] && !is_map_line(set, data->map_spec[i]))
+			i++;
+		else
+			break ;
 	}
-	data->textures = malloc(sizeof(char *) * (count_textures + 1));
+	data->textures = malloc(sizeof(char *) * (i + 1));
 	if (data->textures == NULL)
 		return (EXIT_FAILURE);
-	count_map_lines = count_textures;
+	count_map_lines = i;
 	while (data->map_spec[count_map_lines] && is_map_line(set, data->map_spec[count_map_lines]))
 		count_map_lines++;
 	data->map_only = malloc(sizeof(char *) * (count_map_lines + 1));
 	if (data->map_only == NULL)
-	{
-		free(data->textures);
-		return (EXIT_FAILURE);
-	}
+		return (free(data->textures), EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 
