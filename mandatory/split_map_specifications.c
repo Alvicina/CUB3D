@@ -6,7 +6,7 @@
 /*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 10:28:39 by alvicina          #+#    #+#             */
-/*   Updated: 2024/02/22 12:44:14 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/02/22 13:06:05 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	get_map(t_data *data)
 	char	*set;
 
 	i = 0;
-	set = "10NSEW";
+	set = "10N SEW";
 	while (data->map_spec[i] && !is_map_line(set, data->map_spec[i]))
 		i++;
 	j = 0;
@@ -28,6 +28,7 @@ static int	get_map(t_data *data)
 		data->map_only[j] = ft_strdup(data->map_spec[i]);
 		if (data->map_only[j] == NULL)
 			return (EXIT_FAILURE);
+		printf("%s\n", data->map_only[j]);
 		i++;
 		j++;
 	}
@@ -41,12 +42,13 @@ static int	get_textures(t_data *data)
 	char	*set;
 	
 	i = 0;
-	set = "10NSEW";
+	set = "10N SEW";
 	while (data->map_spec[i] && !is_map_line(set, data->map_spec[i]))
 	{
 		data->textures[i] = ft_strdup(data->map_spec[i]);
 		if (data->textures[i] == NULL)
 			return (EXIT_FAILURE);
+		printf("%s\n", data->textures[i]);
 		i++;
 	}
 	data->textures[i] = 0;
@@ -58,12 +60,24 @@ static int	alloc_memory_for_specs(t_data *data)
 	size_t	count_map_lines;
 	size_t	count_textures;
 	char	*set;
+	size_t	i;
+	size_t	j;
 	
-	set = "10NSEW";
+	set = "10N SEW";
 	count_textures = 0;
 	count_map_lines = 0;
-	while (!is_map_line(set, data->map_spec[count_textures]))
-		count_textures++;
+	i = 0;
+	j = 0;
+	
+	while (data->map_spec[i])
+	{
+		j = 0;
+		while (data->map_spec[i][j] && data->map_spec[i][j] == ' ')
+			j++;
+		if (data->map_spec[i][j] && !is_map_line(set, &data->map_spec[i][j]))
+			count_textures++;
+		i++;
+	}
 	data->textures = malloc(sizeof(char *) * (count_textures + 1));
 	if (data->textures == NULL)
 		return (EXIT_FAILURE);

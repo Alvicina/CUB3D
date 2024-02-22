@@ -6,7 +6,7 @@
 /*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:50:34 by alvicina          #+#    #+#             */
-/*   Updated: 2024/02/22 12:44:22 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/02/22 12:51:07 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	loop_for_map_pos(t_data *data, char *set, size_t count)
 		j = 0;
 		while (data->map_spec[i][j] && data->map_spec[i][j] == ' ')
 			j++;
-		while (data->map_spec[j] && is_map_line(set, data->map_spec[j]))
+		while (data->map_spec[i][j] && is_map_line(set, &data->map_spec[i][j]))
 		{
 			if (i < 6)
 				return (EXIT_FAILURE);
@@ -63,7 +63,7 @@ static int	check_map_position(t_data *data)
 	char	*set;
 	size_t	count;
 
-	set = "10NSEW";
+	set = "10N SEW";
 	count = 0;
 	while (data->map_spec[count])
 		count++;

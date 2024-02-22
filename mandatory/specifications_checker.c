@@ -6,7 +6,7 @@
 /*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 17:36:27 by alvicina          #+#    #+#             */
-/*   Updated: 2024/02/22 12:23:53 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/02/22 13:03:26 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,7 @@ static int	spec_amount_check(t_data *data)
 
 	i = 0;
 	while (data->textures[i])
-	{
-		printf("%s\n", data->textures[i]);
 		i++;
-	}
 	if (i == 6)
 		return (EXIT_SUCCESS);
 	return (EXIT_FAILURE);
