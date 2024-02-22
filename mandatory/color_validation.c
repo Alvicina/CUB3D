@@ -6,7 +6,7 @@
 /*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 13:20:26 by alvicina          #+#    #+#             */
-/*   Updated: 2024/02/21 13:43:12 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/02/22 11:19:01 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ static int	value_valid(char *str, size_t *flag, char **num, int *num_atoi)
 		j = i;
 		while (str[j] >= 48 && str[j] <= 57)
 			j++;
-		(*flag)++;
+		if (str[i])
+			(*flag)++;
 		if (*flag > 3)
 			return (EXIT_FAILURE);
 		*num = ft_substr(str, i, j - i);
