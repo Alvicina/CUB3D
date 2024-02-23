@@ -6,7 +6,7 @@
 /*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:50:34 by alvicina          #+#    #+#             */
-/*   Updated: 2024/02/22 12:44:22 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/02/23 13:34:55 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,14 @@ int	is_map_line(char *set, char *line_to_check)
 static int	loop_for_map_pos(t_data *data, char *set, size_t count)
 {
 	size_t	i;
-	size_t	j;
 
 	i = 0;
 	while (data->map_spec[i])
 	{
-		j = 0;
-		while (data->map_spec[i][j] && data->map_spec[i][j] == ' ')
-			j++;
-		while (data->map_spec[j] && is_map_line(set, data->map_spec[j]))
+		if (data->map_spec[i] && is_map_line(set, data->map_spec[i]))
 		{
 			if (i < 6)
 				return (EXIT_FAILURE);
-			i++;
 			if (i == count)
 				return (EXIT_SUCCESS);
 		}
@@ -63,10 +58,11 @@ static int	check_map_position(t_data *data)
 	char	*set;
 	size_t	count;
 
-	set = "10NSEW";
+	set = "10N SEW";
 	count = 0;
 	while (data->map_spec[count])
 		count++;
+	count = count - 1;
 	if (!loop_for_map_pos(data, set, count))
 		return (EXIT_SUCCESS);
 	return (EXIT_FAILURE);
@@ -74,18 +70,25 @@ static int	check_map_position(t_data *data)
 
 int	get_data(t_data *data)
 {
-	size_t	i;
-
-	i = 0;
 	data->map_spec = ft_split(data->file, '\n');
 	if (data->map_spec == NULL)
 	{
 		free(data->file);
-		return (perror("Split malloc error, could not check map"), EXIT_FAILURE);
+		return (perror("Split malloc error, could not check map"),
+			EXIT_FAILURE);
+	}
+	if (check_map_position(data))
+		return (ft_message("Error\nMap not in last position\n"),
+			free(data->file), EXIT_FAILURE);
+	if (split_map_specifications(data))
+		return (free(data->file), EXIT_FAILURE);
+	if (check_last_part_file(data))
+	{
+		ft_free_pointer_array(data->textures);
+		ft_free_pointer_array(data->map_only);
+		free(data->file);
+		return (EXIT_FAILURE);
 	}
 	free(data->file);
-	if (check_map_position(data))
-		return (ft_message("Error\n"),
-			ft_message("Map not in last position\n"), EXIT_FAILURE);
-	return (split_map_specifications(data));
+	return (EXIT_SUCCESS);
 }
