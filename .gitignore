@@ -1,0 +1,10 @@
+*.o
+*.out
+*.a
+*.log
+*.sh
+*.supp
+*.dSYM
+cub3D
+/.vscode/
+.DS_Store
