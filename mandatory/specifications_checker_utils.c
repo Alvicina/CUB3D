@@ -6,7 +6,7 @@
 /*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 19:03:29 by alvicina          #+#    #+#             */
-/*   Updated: 2024/02/22 11:36:00 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/02/23 12:24:39 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ static int	check_path(char *str)
 	while (str[i])
 		i++;
 	i = i - 1;
-	if (str[i] != 'm' || str[i - 1] != 'p' || str[i - 2] != 'x' ||
-		str[i - 3] != '.')
-			return (EXIT_FAILURE);
+	if (str[i] != 'm' || str[i - 1] != 'p' || str[i - 2] != 'x'
+		|| str[i - 3] != '.')
+		return (EXIT_FAILURE);
 	if (open(str, O_RDONLY) == -1)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);

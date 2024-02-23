@@ -6,7 +6,7 @@
 /*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:50:34 by alvicina          #+#    #+#             */
-/*   Updated: 2024/02/22 18:16:23 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/02/23 12:38:07 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,34 +68,25 @@ static int	check_map_position(t_data *data)
 	return (EXIT_FAILURE);
 }
 
-static int	check_last_part_file(t_data	*data)
-{
-	size_t	i;
-
-	i = 0;
-	while (data->file[i])
-	{
-		while (data->file[i] == ' ')
-			i++;
-		
-		
-	}
-	return (EXIT_SUCCESS);
-}
-
 int	get_data(t_data *data)
 {
 	data->map_spec = ft_split(data->file, '\n');
 	if (data->map_spec == NULL)
 	{
 		free(data->file);
-		return (perror("Split malloc error, could not check map"), EXIT_FAILURE);
+		return (perror("Split malloc error, could not check map"),
+			EXIT_FAILURE);
+	}
+	if (check_map_position(data))
+		return (ft_message("Error\nMap not in last position\n"),
+			free(data->file), EXIT_FAILURE);
+	if (split_map_specifications(data))
+		return (EXIT_FAILURE);
+	if (check_last_part_file(data))
+	{
+		free(data->file);
+		return (EXIT_FAILURE);
 	}
 	free(data->file);
-	if (check_map_position(data))
-		return (ft_message("Error\n"),
-			ft_message("Map not in last position\n"), EXIT_FAILURE);
-	if (check_last_part_file(data))
-		return (ft_message("Map not in las position\n"), EXIT_FAILURE);
-	return (split_map_specifications(data));
+	return (EXIT_SUCCESS);
 }

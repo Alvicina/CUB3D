@@ -6,17 +6,32 @@
 /*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 13:20:26 by alvicina          #+#    #+#             */
-/*   Updated: 2024/02/22 11:19:01 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/02/23 12:34:34 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 
-static int	value_valid(char *str, size_t *flag, char **num, int *num_atoi)
+static int	get_value_and_check(char *str, int i, int j)
+{
+	char	*num;
+	int		num_atoi;
+
+	num = ft_substr(str, i, j - i);
+	if (num == NULL)
+		return (perror(0), EXIT_FAILURE);
+	num_atoi = ft_atoi(num);
+	if (num_atoi > 255)
+		return (EXIT_FAILURE);
+	free(num);
+	return (EXIT_SUCCESS);
+}
+
+static int	value_valid(char *str, size_t *flag)
 {
 	size_t	i;
 	size_t	j;
-	
+
 	i = 0;
 	j = 0;
 	while (str[i])
@@ -30,13 +45,8 @@ static int	value_valid(char *str, size_t *flag, char **num, int *num_atoi)
 			(*flag)++;
 		if (*flag > 3)
 			return (EXIT_FAILURE);
-		*num = ft_substr(str, i, j - i);
-		if (*num == NULL)
-			return (perror(0), EXIT_FAILURE);
-		*num_atoi = ft_atoi(*num);
-		if (*num_atoi > 255)
+		if (get_value_and_check(str, i, j))
 			return (EXIT_FAILURE);
-		free(*num);
 		i = j;
 	}
 	return (EXIT_SUCCESS);
@@ -59,15 +69,11 @@ static int	chars_valid(char *str)
 static int	is_color_valid(char *str)
 {
 	size_t	flag;
-	char	*num;
-	int		num_atoi;
 
 	flag = 0;
-	num = NULL;
-	num_atoi = 0;
 	if (chars_valid(str))
 		return (EXIT_FAILURE);
-	if (value_valid(str, &flag, &num, &num_atoi))
+	if (value_valid(str, &flag))
 		return (EXIT_FAILURE);
 	if (flag != 3)
 		return (EXIT_FAILURE);
