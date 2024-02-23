@@ -6,7 +6,7 @@
 /*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 10:28:39 by alvicina          #+#    #+#             */
-/*   Updated: 2024/02/23 12:48:58 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/02/23 15:45:02 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ static int	get_map(t_data *data)
 			ft_free_pointer_array(data->map_only);
 			return (EXIT_FAILURE);
 		}
-		printf("%s\n", data->map_only[j]);
 		i++;
 		j++;
 	}
@@ -56,7 +55,6 @@ static int	get_textures(t_data *data)
 			ft_free_pointer_array(data->textures);
 			return (EXIT_FAILURE);
 		}
-		printf("%s\n", data->textures[i]);
 		i++;
 	}
 	data->textures[i] = 0;
