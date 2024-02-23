@@ -6,7 +6,7 @@
 /*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 19:03:29 by alvicina          #+#    #+#             */
-/*   Updated: 2024/02/23 12:24:39 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/02/23 13:26:49 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@ static int	check_path(char *str)
 	while (str[i])
 		i++;
 	i = i - 1;
+	while (str[i] == ' ' && i >= 0)
+		i--;
+	if (str[i + 1] == ' ')
+		str[i + 1] = 0;
 	if (str[i] != 'm' || str[i - 1] != 'p' || str[i - 2] != 'x'
 		|| str[i - 3] != '.')
 		return (EXIT_FAILURE);
@@ -45,7 +49,10 @@ static int	find_texture_path_for_valid(char *str)
 	if (!str)
 		return (EXIT_FAILURE);
 	if (check_path(str))
+	{
+		printf("hola1\n");
 		return (EXIT_FAILURE);
+	}
 	return (EXIT_SUCCESS);
 }
 
