@@ -6,7 +6,7 @@
 /*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 19:03:29 by alvicina          #+#    #+#             */
-/*   Updated: 2024/02/23 13:26:49 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/02/23 16:37:20 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,7 @@ static int	find_texture_path_for_valid(char *str)
 	if (!str)
 		return (EXIT_FAILURE);
 	if (check_path(str))
-	{
-		printf("hola1\n");
 		return (EXIT_FAILURE);
-	}
 	return (EXIT_SUCCESS);
 }
 
