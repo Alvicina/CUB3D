@@ -6,7 +6,7 @@
 /*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 17:36:27 by alvicina          #+#    #+#             */
-/*   Updated: 2024/02/23 15:39:11 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/02/25 11:54:09 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,23 @@ static int	texture_checker(t_data *data)
 
 int	specs_checker(t_data *data)
 {
+	size_t	i;
+
+	i = 0;
+	/*while (data->textures[i])
+	{
+		printf("%s\n", data->textures[i]);
+		i++;
+	}
+	i = 0;*/
+	while (data->map_only[i])
+	{
+		printf("%s\n", data->map_only[i]);
+		i++;
+	}
 	if (texture_checker(data))
 		return (EXIT_FAILURE);
-	/*if (map_checker(data))
-		return (EXIT_FAILURE);*/
+	if (map_checker(data))
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 10:28:39 by alvicina          #+#    #+#             */
-/*   Updated: 2024/02/23 15:45:02 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/02/25 12:16:45 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	get_map(t_data *data)
 	while (data->map_spec[i] && !is_map_line(set, data->map_spec[i]))
 		i++;
 	j = 0;
-	while (data->map_spec[i] && is_map_line(set, data->map_spec[i]))
+	while (data->map_spec[i])
 	{
 		data->map_only[j] = ft_strdup(data->map_spec[i]);
 		if (data->map_only[j] == NULL)
@@ -81,8 +81,7 @@ static int	alloc_memory_for_specs(t_data *data)
 	if (data->textures == NULL)
 		return (EXIT_FAILURE);
 	count_map_lines = i;
-	while (data->map_spec[count_map_lines]
-		&& is_map_line(set, data->map_spec[count_map_lines]))
+	while (data->map_spec[count_map_lines])
 		count_map_lines++;
 	data->map_only = malloc(sizeof(char *) * (count_map_lines + 1));
 	if (data->map_only == NULL)

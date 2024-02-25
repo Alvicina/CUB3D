@@ -6,7 +6,7 @@
 /*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:05:05 by alvicina          #+#    #+#             */
-/*   Updated: 2024/02/23 11:42:43 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/02/25 12:01:37 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,5 +50,7 @@ int	check_colors(char *str);
 // modulo check_file_last_part
 int	check_last_part_file(t_data	*data);
 
+// modulo map_validation
+int	map_checker(t_data *data);
 
 #endif
