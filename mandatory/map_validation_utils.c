@@ -6,7 +6,7 @@
 /*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 11:56:10 by alvicina          #+#    #+#             */
-/*   Updated: 2024/02/26 16:11:12 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/02/26 16:44:54 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ int	what_around_whitespace(t_data *data, size_t i, size_t j)
 	}
 	else
 	{
-		/*if (j > ft_strlen(data->map_only[i + 1]))
-			return (EXIT_SUCCESS);*/
 		if (j == 0)
 		{
 			if (j < ft_strlen(data->map_only[i]) - 1 && i < map_lines - 1)
