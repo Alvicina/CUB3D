@@ -6,7 +6,7 @@
 /*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 11:56:10 by alvicina          #+#    #+#             */
-/*   Updated: 2024/02/26 16:44:54 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/02/27 10:58:02 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,32 @@ int	what_around_whitespace(t_data *data, size_t i, size_t j)
 				}
 			}
 		}
+	}
+	return (EXIT_SUCCESS);
+}
+
+int	check_non_lead_whitespace(t_data *data)
+{
+	size_t	i;
+	size_t	j;
+
+	i = 0;
+	while (data->map_only[i])
+	{
+		j = 0;
+		while (data->map_only[i][j])
+		{
+			if (data->map_only[i][j] == ' ')
+			{
+				if (what_around_whitespace(data, i, j))
+				{
+					printf("i: %zu j: %zu  s: %s c: %c\n", i, j, data->map_only[i], data->map_only[i][j]);
+					return (EXIT_FAILURE);
+				}	
+			}
+			j++;
+		}
+		i++;
 	}
 	return (EXIT_SUCCESS);
 }

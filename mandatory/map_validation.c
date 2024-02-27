@@ -6,37 +6,11 @@
 /*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 11:54:40 by alvicina          #+#    #+#             */
-/*   Updated: 2024/02/26 15:57:02 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/02/27 12:32:27 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
-
-static int	check_non_lead_whitespace(t_data *data)
-{
-	size_t	i;
-	size_t	j;
-
-	i = 0;
-	while (data->map_only[i])
-	{
-		j = 0;
-		while (data->map_only[i][j])
-		{
-			if (data->map_only[i][j] == ' ')
-			{
-				if (what_around_whitespace(data, i, j))
-				{
-					printf("i: %zu j: %zu  s: %s c: %c\n", i, j, data->map_only[i], data->map_only[i][j]);
-					return (EXIT_FAILURE);
-				}	
-			}
-			j++;
-		}
-		i++;
-	}
-	return (EXIT_SUCCESS);
-}
 
 static int	left_right_close(t_data *data)
 {
@@ -106,14 +80,30 @@ static int	only_map_chars(t_data *data)
 	return (EXIT_SUCCESS);
 }
 
+static int	map_size(t_data *data)
+{
+	size_t	i;
+
+	i = 0;
+	while (data->map_only[i])
+		i++;
+	if (i < 3)
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
+}
+
 int	map_checker(t_data *data)
 {
+	if (map_size(data))
+		return (ft_message("Error\nMap too small\n"), EXIT_FAILURE);
 	if (only_map_chars(data))
 		return (ft_message("Error\nInvalid char in map\n"), EXIT_FAILURE);
 	if (top_bottom_close(data))
 		return (ft_message("Error\nIncorrect map border\n"), EXIT_FAILURE);
 	if (left_right_close(data))
 		return (ft_message("Error\nIncorrect map border\n"), EXIT_FAILURE);
+	if (make_map_square(data))
+		return (perror("while making map square\n"), EXIT_FAILURE);
 	if (check_non_lead_whitespace(data))
 		return (ft_message("Error\nIncorrect layout\n"), EXIT_FAILURE);
 	return (EXIT_SUCCESS);

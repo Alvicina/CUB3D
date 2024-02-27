@@ -6,7 +6,7 @@
 /*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:51:10 by alvicina          #+#    #+#             */
-/*   Updated: 2024/02/23 17:30:28 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/02/27 11:27:07 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,13 @@ static int	check_arg_name(char *argv)
 {
 	size_t	i;
 
-	i = 0;
-	while (argv[i])
-		i++;
-	i = i - 1;
+	i = ft_strlen(argv) - 1;
 	if (argv[i] != 'b' || argv[i - 1] != 'u' || argv[i - 2] != 'c'
 		|| argv[i - 3] != '.')
+		return (ft_message("Incorrect file name\n"), EXIT_FAILURE);
+	while (i > 0 && argv[i] != '/')
+		i--;
+	if (ft_strlen(&argv[i]) <= 5)
 		return (ft_message("Incorrect file name\n"), EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

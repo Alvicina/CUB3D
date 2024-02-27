@@ -6,7 +6,7 @@
 /*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:05:05 by alvicina          #+#    #+#             */
-/*   Updated: 2024/02/26 11:57:40 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/02/27 11:36:17 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,9 @@ int	map_checker(t_data *data);
 
 // modulo map_validation_utils
 int	what_around_whitespace(t_data *data, size_t i, size_t j);
+int	check_non_lead_whitespace(t_data *data);
+
+// modulo make_square_map
+int	make_map_square(t_data *data);
 
 #endif
