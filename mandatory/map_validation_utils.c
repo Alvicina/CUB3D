@@ -6,39 +6,46 @@
 /*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 11:56:10 by alvicina          #+#    #+#             */
-/*   Updated: 2024/02/27 10:58:02 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/02/27 13:20:10 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 
-int	what_around_whitespace(t_data *data, size_t i, size_t j)
+int	ft_comp(char c, char *set)
 {
-	size_t	map_lines;
+	size_t	i;
+	
+	i = 0;
+	while (set[i])
+	{
+		if (set[i] == c)
+			return (EXIT_SUCCESS);
+		i++;
+	}
+	return (EXIT_FAILURE);
+}
 
-	map_lines = 0;
-	while (data->map_only[map_lines])
-		map_lines++;
+int	what_around_whitespace(t_data *data, int i, size_t j, int lines)
+{
 	if (i == 0)
 	{
-		/*if (j > ft_strlen(data->map_only[i + 1]))
-			return (EXIT_SUCCESS);*/
 		if (j == 0)
 		{
-			if (j < ft_strlen(data->map_only[i]) - 1 && i < map_lines - 1)
-			{
-				if ((data->map_only[i + 1][j] != '1' && data->map_only[i + 1][j] != ' ')
-				|| (data->map_only[i][j + 1] != '1' && data->map_only[i][j + 1] != ' '))
+			if (j < ft_strlen(data->map_only[i]) - 1 && i < lines - 1)
+			{		
+				if (ft_comp(data->map_only[i + 1][j], "1 -") 
+				|| ft_comp(data->map_only[i][j + 1], "1 -"))
 					return (EXIT_FAILURE);
 			}
 		}
 		else
 		{
-			if (j < ft_strlen(data->map_only[i]) - 1 && i < map_lines - 1)
+			if (j < ft_strlen(data->map_only[i]) - 1 && i < lines - 1)
 			{
-				if ((data->map_only[i + 1][j] != '1' && data->map_only[i + 1][j] != ' ')
-				|| (data->map_only[i][j + 1] != '1' && data->map_only[i][j + 1] != ' ')
-				|| (data->map_only[i][j - 1] != '1' && data->map_only[i][j - 1] != ' '))
+				if (ft_comp(data->map_only[i + 1][j], "1 -")
+				|| ft_comp(data->map_only[i][j + 1], "1 -")
+				|| ft_comp(data->map_only[i][j - 1], "1 -"))
 					return (EXIT_FAILURE);
 			}
 		}
@@ -47,28 +54,23 @@ int	what_around_whitespace(t_data *data, size_t i, size_t j)
 	{
 		if (j == 0)
 		{
-			if (j < ft_strlen(data->map_only[i]) - 1 && i < map_lines - 1)
+			if (j < ft_strlen(data->map_only[i]) - 1 && i < lines - 1)
 			{
-				if ((data->map_only[i + 1][j] != '1' && data->map_only[i + 1][j] != ' ')
-				|| (data->map_only[i - 1][j] != '1' && data->map_only[i - 1][j] != ' ')
-				|| (data->map_only[i][j + 1] != '1' && data->map_only[i][j + 1] != ' '))
+				if (ft_comp(data->map_only[i + 1][j], "1 -")
+				|| ft_comp(data->map_only[i - 1][j], "1 -")
+				|| ft_comp(data->map_only[i][j + 1], "1 -"))
 					return (EXIT_FAILURE);
 			}
 		}
 		else
 		{
-			printf("j: %zu i: %zu\n", j, i);
-			printf("ft_strlen: %zu map_lines: %zu\n", ft_strlen(data->map_only[i]), map_lines);
-			if (j < ft_strlen(data->map_only[i]) - 1 && i < map_lines - 1)
+			if (j < ft_strlen(data->map_only[i]) - 1 && i < lines - 1)
 			{
-				if ((data->map_only[i + 1][j] != '1' && data->map_only[i + 1][j] != ' ')
-				|| (data->map_only[i - 1][j] != '1' && data->map_only[i - 1][j] != ' ')
-				|| (data->map_only[i][j + 1] != '1' && data->map_only[i][j + 1] != ' ')
-				|| (data->map_only[i][j - 1] != '1' && data->map_only[i][j - 1] != ' '))
-				{
-					
+				if (ft_comp(data->map_only[i + 1][j], "1 -")
+				|| ft_comp(data->map_only[i - 1][j], "1 -")
+				|| ft_comp(data->map_only[i][j + 1], "1 -")
+				|| ft_comp(data->map_only[i][j + 1], "1 -"))
 					return (EXIT_FAILURE);
-				}
 			}
 		}
 	}
@@ -77,9 +79,13 @@ int	what_around_whitespace(t_data *data, size_t i, size_t j)
 
 int	check_non_lead_whitespace(t_data *data)
 {
-	size_t	i;
+	int		i;
 	size_t	j;
+	int		map_lines;
 
+	map_lines = 0;
+	while (data->map_only[map_lines])
+		map_lines++;
 	i = 0;
 	while (data->map_only[i])
 	{
@@ -88,11 +94,8 @@ int	check_non_lead_whitespace(t_data *data)
 		{
 			if (data->map_only[i][j] == ' ')
 			{
-				if (what_around_whitespace(data, i, j))
-				{
-					printf("i: %zu j: %zu  s: %s c: %c\n", i, j, data->map_only[i], data->map_only[i][j]);
+				if (what_around_whitespace(data, i, j, map_lines))
 					return (EXIT_FAILURE);
-				}	
 			}
 			j++;
 		}
