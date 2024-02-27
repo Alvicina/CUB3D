@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+         #
+#    By: afidalgo <afidalgo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/15 16:37:55 by alvicina          #+#    #+#              #
-#    Updated: 2024/02/23 17:28:46 by alvicina         ###   ########.fr        #
+#    Updated: 2024/02/27 19:42:32 by afidalgo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ HEADER      = $(addprefix $(HEADER_DIR), $(HEADER_SRCS))
 
 MPATH_SRCS  = main_copy_file.c utils_copy_file_map_position.c check_map_position.c \
 			  split_map_specifications.c specifications_checker.c specifications_checker_utils.c \
-			  color_validation.c check_file_last_part.c \
+			  color_validation.c check_file_last_part.c gui_init.c player_init.c player_movement.c \
+			  gui_event_handler.c utils.c
 
 MPATH_DIR   = mandatory/
 MPATH       = $(addprefix $(MPATH_DIR), $(MPATH_SRCS))
@@ -39,13 +40,13 @@ OBJ_B       = $(BPATH:.c=.o)
 all:        lib $(NAME)
 
 $(NAME):    $(OBJ_M)
-		    @$(CC) $(FLAGS) $(OBJ_M) -Llibft -lft -Lmlx -lmlx -framework OpenGl -framework AppKit -o $(NAME) 
+		    @$(CC) $(FLAGS) $(OBJ_M) -lm -Llibft -lft -Lmlx -lmlx -framework OpenGl -framework AppKit -o $(NAME) 
 
 %.o: %.c $(HEADER) Makefile
 		    @$(CC) $(FLAGS) -c $< -o $@
 
 bonus:      lib $(OBJ_B)
-			@$(CC) $(FLAGS) $(OBJ_B) -Llibft -lft -Lmlx -lmlx -framework OpenGl -framework AppKit -o $(NAME)
+			@$(CC) $(FLAGS) $(OBJ_B) -lm -Llibft -lft -Lmlx -lmlx -framework OpenGl -framework AppKit -o $(NAME)
 
 clean:
 	        @$(RM) $(OBJ_M)
