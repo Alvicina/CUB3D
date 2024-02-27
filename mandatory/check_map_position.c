@@ -6,7 +6,7 @@
 /*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:50:34 by alvicina          #+#    #+#             */
-/*   Updated: 2024/02/25 12:12:42 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/02/27 15:37:54 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	get_data(t_data *data)
 	{
 		free(data->file);
 		return (EXIT_FAILURE);
-	}	
+	}
 	if (split_map_specifications(data))
 		return (free(data->file), EXIT_FAILURE);
 	free(data->file);

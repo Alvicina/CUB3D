@@ -6,13 +6,13 @@
 /*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 11:35:05 by alvicina          #+#    #+#             */
-/*   Updated: 2024/02/27 12:59:54 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/02/27 15:25:48 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 
-static int	get_new_map(t_data *data, char **new, size_t max_line)
+static void	get_new_map(t_data *data, char **new, size_t max_line)
 {
 	size_t	i;
 	size_t	j;
@@ -37,7 +37,6 @@ static int	get_new_map(t_data *data, char **new, size_t max_line)
 	}
 	ft_free_pointer_array(data->map_only);
 	data->map_only = new;
-	return (EXIT_SUCCESS);
 }
 
 static int	get_biggest_line(t_data *data)
@@ -78,5 +77,6 @@ int	make_map_square(t_data *data)
 			return (EXIT_FAILURE);
 		i--;
 	}
-	return (get_new_map(data, square_map, max_line));
+	get_new_map(data, square_map, max_line);
+	return (EXIT_SUCCESS);
 }

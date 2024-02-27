@@ -6,7 +6,7 @@
 /*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 11:56:10 by alvicina          #+#    #+#             */
-/*   Updated: 2024/02/27 13:20:10 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/02/27 15:38:52 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_comp(char c, char *set)
 {
 	size_t	i;
-	
+
 	i = 0;
 	while (set[i])
 	{
@@ -26,53 +26,67 @@ int	ft_comp(char c, char *set)
 	return (EXIT_FAILURE);
 }
 
-int	what_around_whitespace(t_data *data, int i, size_t j, int lines)
+static int	first_row(t_data *data, int i, size_t j, int lines)
 {
-	if (i == 0)
+	if (j == 0)
 	{
-		if (j == 0)
+		if (j < ft_strlen(data->map_only[i]) - 1 && i < lines - 1)
 		{
-			if (j < ft_strlen(data->map_only[i]) - 1 && i < lines - 1)
-			{		
-				if (ft_comp(data->map_only[i + 1][j], "1 -") 
-				|| ft_comp(data->map_only[i][j + 1], "1 -"))
-					return (EXIT_FAILURE);
-			}
-		}
-		else
-		{
-			if (j < ft_strlen(data->map_only[i]) - 1 && i < lines - 1)
-			{
-				if (ft_comp(data->map_only[i + 1][j], "1 -")
-				|| ft_comp(data->map_only[i][j + 1], "1 -")
-				|| ft_comp(data->map_only[i][j - 1], "1 -"))
-					return (EXIT_FAILURE);
-			}
+			if (ft_comp(data->map_only[i + 1][j], "1 -")
+			|| ft_comp(data->map_only[i][j + 1], "1 -"))
+				return (EXIT_FAILURE);
 		}
 	}
 	else
 	{
-		if (j == 0)
+		if (j < ft_strlen(data->map_only[i]) - 1 && i < lines - 1)
 		{
-			if (j < ft_strlen(data->map_only[i]) - 1 && i < lines - 1)
-			{
-				if (ft_comp(data->map_only[i + 1][j], "1 -")
-				|| ft_comp(data->map_only[i - 1][j], "1 -")
-				|| ft_comp(data->map_only[i][j + 1], "1 -"))
-					return (EXIT_FAILURE);
-			}
+			if (ft_comp(data->map_only[i + 1][j], "1 -")
+			|| ft_comp(data->map_only[i][j + 1], "1 -")
+			|| ft_comp(data->map_only[i][j - 1], "1 -"))
+				return (EXIT_FAILURE);
 		}
-		else
+	}
+	return (EXIT_SUCCESS);
+}
+
+static int	other_rows(t_data *data, int i, size_t j, int lines)
+{
+	if (j == 0)
+	{
+		if (j < ft_strlen(data->map_only[i]) - 1 && i < lines - 1)
 		{
-			if (j < ft_strlen(data->map_only[i]) - 1 && i < lines - 1)
-			{
-				if (ft_comp(data->map_only[i + 1][j], "1 -")
-				|| ft_comp(data->map_only[i - 1][j], "1 -")
-				|| ft_comp(data->map_only[i][j + 1], "1 -")
-				|| ft_comp(data->map_only[i][j + 1], "1 -"))
-					return (EXIT_FAILURE);
-			}
+			if (ft_comp(data->map_only[i + 1][j], "1 -")
+			|| ft_comp(data->map_only[i - 1][j], "1 -")
+			|| ft_comp(data->map_only[i][j + 1], "1 -"))
+				return (EXIT_FAILURE);
 		}
+	}
+	else
+	{
+		if (j < ft_strlen(data->map_only[i]) - 1 && i < lines - 1)
+		{
+			if (ft_comp(data->map_only[i + 1][j], "1 -")
+			|| ft_comp(data->map_only[i - 1][j], "1 -")
+			|| ft_comp(data->map_only[i][j + 1], "1 -")
+			|| ft_comp(data->map_only[i][j + 1], "1 -"))
+				return (EXIT_FAILURE);
+		}
+	}
+	return (EXIT_SUCCESS);
+}
+
+int	what_around_whitespace(t_data *data, int i, size_t j, int lines)
+{
+	if (i == 0)
+	{
+		if (first_row(data, i, j, lines))
+			return (EXIT_FAILURE);
+	}
+	else
+	{
+		if (other_rows(data, i, j, lines))
+			return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
 }

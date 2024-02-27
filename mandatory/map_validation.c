@@ -6,7 +6,7 @@
 /*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 11:54:40 by alvicina          #+#    #+#             */
-/*   Updated: 2024/02/27 12:32:27 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/02/27 15:38:24 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int	left_right_close(t_data *data)
 
 	i = 0;
 	while (data->map_only[i])
-	{	
+	{
 		j = 0;
 		while (data->map_only[i][j] == ' ')
 			j++;
@@ -29,7 +29,7 @@ static int	left_right_close(t_data *data)
 			j++;
 		j = j - 1;
 		while (j >= 0 && data->map_only[i][j] && data->map_only[i][j] == ' ')
-				j--;
+			j--;
 		if (j == 0 || data->map_only[i][j] != '1')
 			return (EXIT_FAILURE);
 		i++;
@@ -107,5 +107,4 @@ int	map_checker(t_data *data)
 	if (check_non_lead_whitespace(data))
 		return (ft_message("Error\nIncorrect layout\n"), EXIT_FAILURE);
 	return (EXIT_SUCCESS);
-	
 }
