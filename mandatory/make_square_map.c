@@ -6,7 +6,7 @@
 /*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 11:35:05 by alvicina          #+#    #+#             */
-/*   Updated: 2024/02/27 15:25:48 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/02/27 18:01:48 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ static void	get_new_map(t_data *data, char **new, size_t max_line)
 			j++;
 		}
 		new[i][j] = 0;
-		printf("%s\n", new[i]);
 		i++;
 	}
 	ft_free_pointer_array(data->map_only);

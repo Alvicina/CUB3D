@@ -6,7 +6,7 @@
 /*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:51:10 by alvicina          #+#    #+#             */
-/*   Updated: 2024/02/27 11:27:07 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/02/27 18:44:54 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,7 @@ int	main(int argc, char **argv)
 	ft_free_pointer_array(data.textures);
 	ft_free_pointer_array(data.map_only);
 	ft_free_pointer_array(data.map_spec);
+	/*(void) argc;
+	(void) argv;*/
 	return (EXIT_SUCCESS);
 }
