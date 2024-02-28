@@ -6,7 +6,7 @@
 #    By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/15 16:37:55 by alvicina          #+#    #+#              #
-#    Updated: 2024/02/27 18:02:24 by alvicina         ###   ########.fr        #
+#    Updated: 2024/02/28 11:52:47 by alvicina         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@
 NAME            = cub3D
 CC              = gcc
 RM              = rm -rf
-FLAGS           = -Wall -Wextra -Werror -Ilibft -Imlx -g3 #-fsanitize=address
+FLAGS           = -Wall -Wextra -Werror -Ilibft -Imlx -g3 -fsanitize=address
 
 #FILES AND PATH
 
@@ -26,7 +26,7 @@ HEADER      = $(addprefix $(HEADER_DIR), $(HEADER_SRCS))
 MPATH_SRCS  = main_copy_file.c utils_copy_file_map_position.c check_map_position.c \
 			  split_map_specifications.c specifications_checker.c specifications_checker_utils.c \
 			  color_validation.c check_file_last_part.c map_validation.c map_validation_utils.c \
-			  make_square_map.c \
+			  make_square_map.c check_player.c \
 
 MPATH_DIR   = mandatory/
 MPATH       = $(addprefix $(MPATH_DIR), $(MPATH_SRCS))

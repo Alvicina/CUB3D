@@ -6,7 +6,7 @@
 /*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 11:54:40 by alvicina          #+#    #+#             */
-/*   Updated: 2024/02/27 15:38:24 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/02/28 11:24:36 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,5 +106,7 @@ int	map_checker(t_data *data)
 		return (perror("while making map square\n"), EXIT_FAILURE);
 	if (check_non_lead_whitespace(data))
 		return (ft_message("Error\nIncorrect layout\n"), EXIT_FAILURE);
+	if (check_player(data))
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
