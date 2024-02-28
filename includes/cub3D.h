@@ -6,7 +6,7 @@
 /*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:05:05 by alvicina          #+#    #+#             */
-/*   Updated: 2024/02/28 11:56:35 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/02/28 16:40:29 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ int		ft_comp(char c, char *set);
 // modulo make_square_map
 int		make_map_square(t_data *data);
 
-// modulo check_player
+// modulo check_player_and_left
 int		check_player(t_data *data);
+int		check_left_close(t_data *data, int j, int i);
 
 #endif

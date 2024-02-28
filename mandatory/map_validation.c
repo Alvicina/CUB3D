@@ -6,7 +6,7 @@
 /*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/25 11:54:40 by alvicina          #+#    #+#             */
-/*   Updated: 2024/02/28 12:45:29 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/02/28 16:37:50 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,14 @@ static int	left_right_close(t_data *data)
 		j = 0;
 		while (data->map_only[i][j] == ' ')
 			j++;
-		if (!data->map_only[i][j] || data->map_only[i][j] != '1')
-			return (EXIT_FAILURE);
-		while (data->map_only[i][j])
-			j++;
-		j = j - 1;
-		while (j >= 0)
+		if (!data->map_only[i][j])
+			i++;
+		else
 		{
-			while (data->map_only[i][j] == ' ')
-				j--;
-			if (data->map_only[i][j] != '1')
+			if (check_left_close(data, j, i))
 				return (EXIT_FAILURE);
-			break;
+			i++;
 		}
-		i++;
 	}
 	return (EXIT_SUCCESS);
 }
