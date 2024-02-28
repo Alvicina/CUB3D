@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_player.c                                     :+:      :+:    :+:   */
+/*   check_player_and_left.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/28 11:28:26 by alvicina          #+#    #+#             */
-/*   Updated: 2024/02/28 16:36:55 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/02/28 16:56:58 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	check_left_close(t_data *data, int j, int i)
 	if (data->map_only[i][j] && data->map_only[i][j] != '1')
 		return (EXIT_FAILURE);
 	while (data->map_only[i][j])
-			j++;
+		j++;
 	j = j - 1;
 	while (j >= 0)
 	{
@@ -25,7 +25,7 @@ int	check_left_close(t_data *data, int j, int i)
 			j--;
 		if (data->map_only[i][j] != '1')
 			return (EXIT_FAILURE);
-		break;
+		break ;
 	}
 	return (EXIT_SUCCESS);
 }
