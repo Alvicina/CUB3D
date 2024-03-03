@@ -6,7 +6,7 @@
 /*   By: afidalgo <afidalgo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:51:10 by alvicina          #+#    #+#             */
-/*   Updated: 2024/03/03 09:51:47 by afidalgo         ###   ########.fr       */
+/*   Updated: 2024/03/03 10:44:22 by afidalgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,7 @@ int	main(int argc, char **argv)
 	}
 	set_event_hooks(&data);
 	init_player(&data);
+	render_map(&data);
 	mlx_loop(data.mlx->mlx_ptr);
 	return (EXIT_SUCCESS);
 }

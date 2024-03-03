@@ -6,7 +6,7 @@
 /*   By: afidalgo <afidalgo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:05:05 by alvicina          #+#    #+#             */
-/*   Updated: 2024/03/03 09:51:32 by afidalgo         ###   ########.fr       */
+/*   Updated: 2024/03/03 10:54:39 by afidalgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,6 @@ typedef struct s_mlx
 	void		*win_ptr;
 	void		*img_ptr;
 	t_img_data	img_data;
-	char		**map;
 }				t_mlx;
 
 typedef struct s_data
@@ -78,6 +77,14 @@ typedef struct s_point
 	int	x;
 	int	y;
 }		t_point;
+
+typedef enum e_direction
+{
+	LEFT,
+	RIGHT,
+	FORWARD,
+	BACKWARD
+}	t_direction;
 
 // modulo utils_copy_file_map_position
 void	ft_message(char *str);
@@ -129,14 +136,21 @@ void	set_event_hooks(t_data *data);
 int		init_player(t_data *data);
 
 // player_movement.c
-void	look_left(t_player *player);
-void	look_right(t_player *player);
-void	move(t_data *data, double dir_rad);
-void	move_forward(t_data *data);
-void	move_backward(t_data *data);
-void	move_left(t_data *data);
-void	move_right(t_data *data);
+void	move(t_data *data, t_direction dir);
+
+// player_direction.c
+void	turn_pov(t_data *data, t_direction dir);
+
+// map_walls.c
 int		is_next_step_a_wall(t_data *data, double dir_rad);
+double	get_distance_to_wall(t_data *data, int x, int y, double dir_deg);
+int		is_coord_a_wall(t_data *data, int x, int y);
+
+// map_render.c
+void	render_map(t_data *data);
+
+// mlx_utils.c
+void	draw_pixel(t_mlx *mlx, int x, int y, int color);
 
 // utils.c
 int		terminate(t_data *data);
