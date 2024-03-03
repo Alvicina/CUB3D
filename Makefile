@@ -6,7 +6,7 @@
 #    By: afidalgo <afidalgo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/15 16:37:55 by alvicina          #+#    #+#              #
-#    Updated: 2024/03/03 09:49:37 by afidalgo         ###   ########.fr        #
+#    Updated: 2024/03/03 10:43:13 by afidalgo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@
 NAME            = cub3D
 CC              = gcc
 RM              = rm -rf
-FLAGS           = -Wall -Wextra -Werror -Ilibft -Imlx -g3 -fsanitize=address
+FLAGS           = -Wall -Wextra -Werror -Ilibft -Imlx # -g3 -fsanitize=address
 
 #FILES AND PATH
 
@@ -27,7 +27,7 @@ MPATH_SRCS  = main_copy_file.c utils_copy_file_map_position.c check_map_position
 			  split_map_specifications.c specifications_checker.c specifications_checker_utils.c \
 			  color_validation.c check_file_last_part.c map_validation.c map_validation_utils.c \
 			  make_square_map.c check_player_and_left.c gui_init.c player_init.c player_movement.c \
-			  player_direction.c gui_event_handler.c map_walls.c utils.c
+			  player_direction.c gui_event_handler.c map_walls.c map_render.c mlx_utils.c utils.c
 
 MPATH_DIR   = mandatory/
 MPATH       = $(addprefix $(MPATH_DIR), $(MPATH_SRCS))

@@ -6,7 +6,7 @@
 /*   By: afidalgo <afidalgo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 19:36:15 by afidalgo          #+#    #+#             */
-/*   Updated: 2024/02/27 19:45:45 by afidalgo         ###   ########.fr       */
+/*   Updated: 2024/03/03 10:30:15 by afidalgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,18 +25,16 @@ static int	handle_key_down(int key, t_data *data)
 	if (key == KEY_ESC)
 		terminate(data);
 	if (key == KEY_LEFT)
-		look_left(data->player);
+		turn_pov(data, LEFT);
 	if (key == KEY_RIGHT)
-		look_right(data->player);
+		turn_pov(data, RIGHT);
 	if (key == KEY_DOWN || key == KEY_S)
-		move_backward(data);
+		move(data, BACKWARD);
 	if (key == KEY_UP || key == KEY_W)
-		move_forward(data);
+		move(data, FORWARD);
 	if (key == KEY_A)
-		move_left(data);
+		move(data, LEFT);
 	if (key == KEY_D)
-		move_right(data);
-	printf("(x, y, dir) = (%d, %d, %d)\n", data->player->x, data->player->y, data->player->dir);
-	// draw(data);
+		move(data, RIGHT);
 	return (0);
 }
