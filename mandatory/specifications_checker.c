@@ -6,7 +6,7 @@
 /*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 17:36:27 by alvicina          #+#    #+#             */
-/*   Updated: 2024/02/23 15:39:11 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/02/27 15:39:18 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ int	specs_checker(t_data *data)
 {
 	if (texture_checker(data))
 		return (EXIT_FAILURE);
-	/*if (map_checker(data))
-		return (EXIT_FAILURE);*/
+	if (map_checker(data))
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

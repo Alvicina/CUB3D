@@ -6,7 +6,7 @@
 /*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:50:34 by alvicina          #+#    #+#             */
-/*   Updated: 2024/02/23 13:34:55 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/02/28 13:10:56 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,17 +78,15 @@ int	get_data(t_data *data)
 			EXIT_FAILURE);
 	}
 	if (check_map_position(data))
-		return (ft_message("Error\nMap not in last position\n"),
+		return (ft_message("Error\nMap not in correct position\n"),
 			free(data->file), EXIT_FAILURE);
-	if (split_map_specifications(data))
-		return (free(data->file), EXIT_FAILURE);
 	if (check_last_part_file(data))
 	{
-		ft_free_pointer_array(data->textures);
-		ft_free_pointer_array(data->map_only);
 		free(data->file);
 		return (EXIT_FAILURE);
 	}
+	if (split_map_specifications(data))
+		return (free(data->file), EXIT_FAILURE);
 	free(data->file);
 	return (EXIT_SUCCESS);
 }

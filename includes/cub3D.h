@@ -6,7 +6,7 @@
 /*   By: afidalgo <afidalgo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:05:05 by alvicina          #+#    #+#             */
-/*   Updated: 2024/02/27 19:44:16 by afidalgo         ###   ########.fr       */
+/*   Updated: 2024/03/03 09:51:32 by afidalgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,25 +86,39 @@ int		check_number_args(int argc);
 void	ft_free_pointer_array(char **str);
 
 // modulo check_map_position
-int	get_data(t_data *data);
-int	is_map_line(char *set, char *line_to_check);
+int		get_data(t_data *data);
+int		is_map_line(char *set, char *line_to_check);
 
 // modulo split_map_specifications
-int	split_map_specifications(t_data *data);
+int		split_map_specifications(t_data *data);
 
 // modulo specifications_checker
-int	specs_checker(t_data *data);
+int		specs_checker(t_data *data);
 
 // modulo specifications_checker_utils
 int		spec_valid_check(t_data *data);
 void	is_white_space(char **str);
 
 // modulo color_validation
-int	check_colors(char *str);
+int		check_colors(char *str);
 
 // modulo check_file_last_part
-int	check_last_part_file(t_data	*data);
+int		check_last_part_file(t_data	*data);
 
+// modulo map_validation
+int		map_checker(t_data *data);
+
+// modulo map_validation_utils
+int		what_around_whitespace(t_data *data, int i, size_t j, int lines);
+int		check_non_lead_whitespace(t_data *data);
+int		ft_comp(char c, char *set);
+
+// modulo make_square_map
+int		make_map_square(t_data *data);
+
+// modulo check_player_and_left
+int		check_player(t_data *data);
+int		check_left_close(t_data *data, int j, int i);
 // gui_init.c
 int		init_gui(t_data *data);
 
