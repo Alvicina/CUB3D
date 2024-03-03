@@ -6,7 +6,7 @@
 /*   By: afidalgo <afidalgo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:51:10 by alvicina          #+#    #+#             */
-/*   Updated: 2024/03/03 10:44:22 by afidalgo         ###   ########.fr       */
+/*   Updated: 2024/03/03 14:22:40 by afidalgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ static char	*get_file(char *argv)
 int	main(int argc, char **argv)
 {
 	t_data	data;
+	// double distance;
+	// double i;
 
 	if (check_number_args(argc))
 		return (EXIT_FAILURE);
@@ -111,6 +113,22 @@ int	main(int argc, char **argv)
 	set_event_hooks(&data);
 	init_player(&data);
 	render_map(&data);
+
+	// i = data.player->dir + 15;
+	// while (i >= data.player->dir - 15)
+	// {
+	// 	distance = get_distance_to_wall(&data, data.player->x, data.player->y, i);
+	// 	printf("distance = %f dir = %f\n", distance, i);
+	// 	i--;
+	// }
+	// distance = get_distance_to_wall(&data, data.player->x, data.player->y, data.player->dir - 3, 0);
+	// printf("distance = %f dir = %d\n\n\n", distance, data.player->dir - 3);
+	// distance = get_distance_to_wall(&data, data.player->x, data.player->y, 89.96, 0);
+	// printf("distance = %f dir = %f\n\n\n", distance, 89.96);
+	// distance = get_distance_to_wall(&data, data.player->x, data.player->y, data.player->dir + 3, 0);
+	// printf("distance = %f dir = %d\n\n\n", distance, data.player->dir + 3);
+
 	mlx_loop(data.mlx->mlx_ptr);
+
 	return (EXIT_SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: afidalgo <afidalgo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:05:05 by alvicina          #+#    #+#             */
-/*   Updated: 2024/03/03 10:54:39 by afidalgo         ###   ########.fr       */
+/*   Updated: 2024/03/03 14:21:28 by afidalgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 # define MOVE_SPEED 10
 # define TURN_SPEED 5
 
-# define PI 3.14159265359
+# define PI 3.1415926535897932384626
 
 typedef struct s_player
 {
@@ -143,7 +143,7 @@ void	turn_pov(t_data *data, t_direction dir);
 
 // map_walls.c
 int		is_next_step_a_wall(t_data *data, double dir_rad);
-double	get_distance_to_wall(t_data *data, int x, int y, double dir_deg);
+double	get_distance_to_wall(t_data *data, int x, int y, double dir_deg, int depth);
 int		is_coord_a_wall(t_data *data, int x, int y);
 
 // map_render.c
@@ -154,6 +154,7 @@ void	draw_pixel(t_mlx *mlx, int x, int y, int color);
 
 // utils.c
 int		terminate(t_data *data);
-double	deg2rad(int deg);
+double	deg2rad(double deg);
+double	rad2deg(double rad);
 
 #endif

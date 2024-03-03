@@ -6,7 +6,7 @@
 /*   By: afidalgo <afidalgo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 09:54:57 by afidalgo          #+#    #+#             */
-/*   Updated: 2024/03/03 10:48:38 by afidalgo         ###   ########.fr       */
+/*   Updated: 2024/03/03 12:20:41 by afidalgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void	render_walls(t_data *data)
 			data,
 			data->player->x,
 			data->player->y,
-			(data->player->dir + (POV_DEG / 2)) - (i * win_dir_ratio));
+			(data->player->dir + (POV_DEG / 2)) - (i * win_dir_ratio), 0);
 		wall_v_distance = (WIN_HEIGHT * 20) / distance_to_wall;
 		if (wall_v_distance > WIN_HEIGHT)
 			wall_v_distance = WIN_HEIGHT;

@@ -6,7 +6,7 @@
 /*   By: afidalgo <afidalgo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 19:29:14 by afidalgo          #+#    #+#             */
-/*   Updated: 2024/03/03 11:04:13 by afidalgo         ###   ########.fr       */
+/*   Updated: 2024/03/03 14:12:53 by afidalgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ int	init_player(t_data *data)
 	if (data->player == NULL)
 		return (EXIT_FAILURE);
 	// TODO: Calcular los siguientes valores en base al mapa
-	data->player->x = 96;
-	data->player->y = 96;
-	data->player->dir = 0;
-	// data->player->x = 320;
-	// data->player->y = 323;
-	// data->player->dir = 5.06;
+	// data->player->x = 96;
+	// data->player->y = 96;
+	// data->player->dir = 0;
+	data->player->x = 1023;
+	data->player->y = 512;
+	data->player->dir = 89;
 	return (EXIT_SUCCESS);
 }
