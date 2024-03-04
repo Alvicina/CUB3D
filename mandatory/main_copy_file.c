@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_copy_file.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afidalgo <afidalgo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:51:10 by alvicina          #+#    #+#             */
-/*   Updated: 2024/03/03 14:22:40 by afidalgo         ###   ########.fr       */
+/*   Updated: 2024/03/04 15:59:09 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int	main(int argc, char **argv)
 	t_data	data;
 	// double distance;
 	// double i;
-
+	
 	if (check_number_args(argc))
 		return (EXIT_FAILURE);
 	if (check_arg_name(argv[1]))
