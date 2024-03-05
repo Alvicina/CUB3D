@@ -6,7 +6,7 @@
 /*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 09:42:38 by afidalgo          #+#    #+#             */
-/*   Updated: 2024/03/05 19:26:26 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/03/05 19:43:56 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ double	get_distance_to_wall(t_data *data, double x, double y, double dir_deg, in
 	int		wall_y_round;
 	double	distance_to_wall_x;
 	double	distance_to_wall_y;
+	double	fish_eye;
 
 	wall_x = -1.0;
 	wall_y = -1.0;
@@ -223,7 +224,8 @@ double	get_distance_to_wall(t_data *data, double x, double y, double dir_deg, in
 		// TODO: Esto hace efecto ojo de pez
 		distance_to_wall_x = fabs(data->player->x - wall_x);
 		distance_to_wall_y = fabs(data->player->y - wall_y);
-		return (sqrt(pow(distance_to_wall_x, 2) + pow(distance_to_wall_y, 2))); // Teorema de Pitagoras
+		fish_eye = sqrt(pow(distance_to_wall_x, 2) + pow(distance_to_wall_y, 2)); // Teorema de Pitagoras
+		return (cos(fabs(deg2rad(data->player->dir) - dir_rad)) * fish_eye);
 	}
 	else
 	{
