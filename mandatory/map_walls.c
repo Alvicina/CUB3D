@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_walls.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afidalgo <afidalgo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 09:42:38 by afidalgo          #+#    #+#             */
-/*   Updated: 2024/03/03 14:24:15 by afidalgo         ###   ########.fr       */
+/*   Updated: 2024/03/05 19:26:26 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,11 @@ int	is_next_step_a_wall(t_data *data, double dir_rad)
 	new_y = data->player->y - round(sin(dir_rad) * MOVE_SPEED);
 	tile_x = new_x / TILE_LEN;
 	tile_y = new_y / TILE_LEN;
-	if (tile_x >= 0 && tile_y >= 0
-		&& tile_y < WIN_HEIGHT && tile_x < WIN_WIDTH
-		&& data->map_only[tile_y][tile_x] == '1')
+	// if (tile_x >= 0 && tile_y >= 0
+	// 	&& tile_y < WIN_HEIGHT && tile_x < WIN_WIDTH
+	// 	&& data->map_only[tile_y][tile_x] == '1')
+	printf("x,y %d %d\n", new_x, new_y);
+	if (is_coord_a_wall(data, new_x, new_y))
 	{
 		printf("Te has chocado\n");
 		return (1);
@@ -43,6 +45,8 @@ int	is_coord_a_wall(t_data *data, int x, int y)
 	// 	return (1);
 	tile_x = x / TILE_LEN;
 	tile_y = y / TILE_LEN;
+	if (data->map_only[tile_y][tile_x] == '1')
+		return (1);
 	// printf("(x, y) (tile_x, tile_y) = (%d, %d) (%d, %d)\n", x, y, tile_x, tile_y);
 	if (x % TILE_LEN == 0)
 	{
@@ -62,7 +66,7 @@ int	is_coord_a_wall(t_data *data, int x, int y)
 	return (0);
 }
 
-double	get_distance_to_wall(t_data *data, int x, int y, double dir_deg, int depth)
+double	get_distance_to_wall(t_data *data, double x, double y, double dir_deg, int depth)
 {
 	double	dir_rad;
 	double	distance_top;
@@ -87,12 +91,12 @@ double	get_distance_to_wall(t_data *data, int x, int y, double dir_deg, int dept
 	if (dir_deg < 0)
 		dir_deg += 360;
 	dir_rad = deg2rad(dir_deg);
-	distance_top = y % TILE_LEN;
+	distance_top = fmod(y, TILE_LEN);
 	distance_bottom = TILE_LEN - distance_top;
-	distance_left = x % TILE_LEN;
+	distance_left = fmod(x, TILE_LEN);
 	distance_right = TILE_LEN - distance_left;
 	// printf("(x, y) = (%d, %d)\n", x, y);
-	if (y % 64 == 0)
+	if (fmod(y, TILE_LEN) == 0)
 	{
 		// if (dir_deg == 180)
 		// {
@@ -117,7 +121,7 @@ double	get_distance_to_wall(t_data *data, int x, int y, double dir_deg, int dept
 		}
 	}
 
-	if (x % 64 == 0)
+	if (fmod (x, TILE_LEN) == 0)
 	{
 		// if (dir_deg == 90)
 		// {
@@ -213,7 +217,7 @@ double	get_distance_to_wall(t_data *data, int x, int y, double dir_deg, int dept
 
 	wall_x_round = round(wall_x);
 	wall_y_round = round(wall_y);
-	// printf("(wall_x, wall_y) = (%f, %f) (%d, %d)\n", wall_x, wall_y, wall_x_round, wall_y_round);
+	//printf("(wall_x, wall_y) = (%f, %f) (%d, %d)\n", wall_x, wall_y, wall_x_round, wall_y_round);
 	if (is_coord_a_wall(data, wall_x_round, wall_y_round))
 	{
 		// TODO: Esto hace efecto ojo de pez
@@ -224,7 +228,7 @@ double	get_distance_to_wall(t_data *data, int x, int y, double dir_deg, int dept
 	else
 	{
 		// if (depth <= 1)
-			return (get_distance_to_wall(data, wall_x_round, wall_y_round, dir_deg, depth + 1));
+			return (get_distance_to_wall(data, wall_x, wall_y, dir_deg, depth + 1));
 	}
 	return (0);
 }

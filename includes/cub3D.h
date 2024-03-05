@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afidalgo <afidalgo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:05:05 by alvicina          #+#    #+#             */
-/*   Updated: 2024/03/03 14:21:28 by afidalgo         ###   ########.fr       */
+/*   Updated: 2024/03/05 18:58:29 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ void	turn_pov(t_data *data, t_direction dir);
 
 // map_walls.c
 int		is_next_step_a_wall(t_data *data, double dir_rad);
-double	get_distance_to_wall(t_data *data, int x, int y, double dir_deg, int depth);
+double	get_distance_to_wall(t_data *data, double x, double y, double dir_deg, int depth);
 int		is_coord_a_wall(t_data *data, int x, int y);
 
 // map_render.c

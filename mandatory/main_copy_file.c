@@ -6,7 +6,7 @@
 /*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:51:10 by alvicina          #+#    #+#             */
-/*   Updated: 2024/03/04 15:59:09 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/03/05 18:59:12 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,8 @@ static char	*get_file(char *argv)
 int	main(int argc, char **argv)
 {
 	t_data	data;
-	// double distance;
-	// double i;
+	 //double distance;
+	//double i;
 	
 	if (check_number_args(argc))
 		return (EXIT_FAILURE);
@@ -114,17 +114,22 @@ int	main(int argc, char **argv)
 	init_player(&data);
 	render_map(&data);
 
-	// i = data.player->dir + 15;
+	// i = data.player->dir;
 	// while (i >= data.player->dir - 15)
 	// {
-	// 	distance = get_distance_to_wall(&data, data.player->x, data.player->y, i);
+	// 	distance = get_distance_to_wall(&data, data.player->x, data.player->y, i, 0);
 	// 	printf("distance = %f dir = %f\n", distance, i);
-	// 	i--;
+	// 	i -= 0.5;
 	// }
-	// distance = get_distance_to_wall(&data, data.player->x, data.player->y, data.player->dir - 3, 0);
-	// printf("distance = %f dir = %d\n\n\n", distance, data.player->dir - 3);
-	// distance = get_distance_to_wall(&data, data.player->x, data.player->y, 89.96, 0);
-	// printf("distance = %f dir = %f\n\n\n", distance, 89.96);
+	// printf("\n\n");
+	// distance = get_distance_to_wall(&data, data.player->x, data.player->y, 258, 0);
+	// printf("distance = %f dir = %d\n\n\n", distance, 258);
+	// distance = get_distance_to_wall(&data, data.player->x, data.player->y, 257.5, 0);
+	// printf("distance = %f dir = %f\n\n\n", distance, 257.5);
+	// distance = get_distance_to_wall(&data, data.player->x, data.player->y, 257, 0);
+	// printf("distance = %f dir = %d\n\n\n", distance, 257);
+	// distance = get_distance_to_wall(&data, data.player->x, data.player->y, 256.5, 0);
+	// printf("distance = %f dir = %f\n\n\n", distance, 256.5);
 	// distance = get_distance_to_wall(&data, data.player->x, data.player->y, data.player->dir + 3, 0);
 	// printf("distance = %f dir = %d\n\n\n", distance, data.player->dir + 3);
 
