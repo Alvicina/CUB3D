@@ -6,7 +6,7 @@
 /*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 09:42:38 by afidalgo          #+#    #+#             */
-/*   Updated: 2024/03/05 19:43:56 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/03/06 19:15:55 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,7 @@ int	is_next_step_a_wall(t_data *data, double dir_rad)
 	new_y = data->player->y - round(sin(dir_rad) * MOVE_SPEED);
 	tile_x = new_x / TILE_LEN;
 	tile_y = new_y / TILE_LEN;
-	// if (tile_x >= 0 && tile_y >= 0
-	// 	&& tile_y < WIN_HEIGHT && tile_x < WIN_WIDTH
-	// 	&& data->map_only[tile_y][tile_x] == '1')
-	printf("x,y %d %d\n", new_x, new_y);
+	//printf("x,y %d %d\n", new_x, new_y);
 	if (is_coord_a_wall(data, new_x, new_y))
 	{
 		printf("Te has chocado\n");
@@ -35,7 +32,7 @@ int	is_next_step_a_wall(t_data *data, double dir_rad)
 	return (0);
 }
 
-int	is_coord_a_wall(t_data *data, int x, int y)
+int	is_coord_a_wall(t_data *data, double x, double y)
 {
 	int	tile_x;
 	int	tile_y;
@@ -48,17 +45,17 @@ int	is_coord_a_wall(t_data *data, int x, int y)
 	if (data->map_only[tile_y][tile_x] == '1')
 		return (1);
 	// printf("(x, y) (tile_x, tile_y) = (%d, %d) (%d, %d)\n", x, y, tile_x, tile_y);
-	if (x % TILE_LEN == 0)
+	if (fmod(x, TILE_LEN) == 0)
 	{
 		if (data->map_only[tile_y][tile_x] == '1' || data->map_only[tile_y][tile_x - 1] == '1')
 			return (1);
 	}
-	if (y % TILE_LEN == 0)
+	if (fmod(y, TILE_LEN) == 0)
 	{
 		if (data->map_only[tile_y][tile_x] == '1' || data->map_only[tile_y - 1][tile_x] == '1')
 			return (1);
 	}
-	if (x % TILE_LEN == 0 && y % TILE_LEN == 0)
+	if (fmod(x, TILE_LEN)== 0 && fmod(y, TILE_LEN) == 0)
 	{
 		if (data->map_only[tile_y - 1][tile_x - 1] == '1')
 			return (1);
@@ -219,7 +216,7 @@ double	get_distance_to_wall(t_data *data, double x, double y, double dir_deg, in
 	wall_x_round = round(wall_x);
 	wall_y_round = round(wall_y);
 	//printf("(wall_x, wall_y) = (%f, %f) (%d, %d)\n", wall_x, wall_y, wall_x_round, wall_y_round);
-	if (is_coord_a_wall(data, wall_x_round, wall_y_round))
+	if (is_coord_a_wall(data, wall_x, wall_y)/*wall_x_round, wall_y_round*/)
 	{
 		// TODO: Esto hace efecto ojo de pez
 		distance_to_wall_x = fabs(data->player->x - wall_x);

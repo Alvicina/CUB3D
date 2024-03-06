@@ -6,7 +6,7 @@
 /*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 19:29:14 by afidalgo          #+#    #+#             */
-/*   Updated: 2024/03/05 19:35:59 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/03/06 18:29:20 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,8 @@ int	init_player(t_data *data)
 	// data->player->x = 96;
 	// data->player->y = 96;
 	// data->player->dir = 0;
-	data->player->x = 137;
-	data->player->y = 842;
+	data->player->x = 147;
+	data->player->y = 841;
 	data->player->dir = 10;
 	return (EXIT_SUCCESS);
 }
