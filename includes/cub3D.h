@@ -6,7 +6,7 @@
 /*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:05:05 by alvicina          #+#    #+#             */
-/*   Updated: 2024/03/06 19:10:49 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/03/07 17:23:37 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,18 @@ typedef struct s_mlx
 	void		*win_ptr;
 	void		*img_ptr;
 	t_img_data	img_data;
+	t_img_data	img_data_N;
+	t_img_data	img_data_S;
+	t_img_data	img_data_E;
+	t_img_data	img_data_W;
+	void		*N_img;
+	char		*N_addr;
+	void		*S_img;
+	char		*S_addr;
+	void		*E_img;
+	char		*E_addr;
+	void		*W_img;
+	char		*W_addr;
 }				t_mlx;
 
 typedef struct s_data
@@ -70,6 +82,10 @@ typedef struct s_data
 	char		**map_only;
 	t_player	*player;
 	t_mlx		*mlx;
+	char		*N_text;
+	char		*S_text;
+	char		*E_text;
+	char		*W_text;
 }				t_data;
 
 typedef struct s_point
@@ -156,5 +172,9 @@ void	draw_pixel(t_mlx *mlx, int x, int y, int color);
 int		terminate(t_data *data);
 double	deg2rad(double deg);
 double	rad2deg(double rad);
+
+// gui_init_utils.c 
+int	set_texture(char *texture, t_data *data);
+
 
 #endif
