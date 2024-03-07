@@ -6,7 +6,7 @@
 /*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 19:03:29 by alvicina          #+#    #+#             */
-/*   Updated: 2024/02/23 16:37:20 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/03/07 18:54:16 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,18 @@ static int	check_path(char *str)
 	return (EXIT_SUCCESS);
 }
 
-static int	find_texture_path_for_valid(char *str)
+static int	find_texture_path_for_valid(char *str, t_data *data)
 {
 	is_white_space(&str);
-	if (!ft_strncmp(str, "F", 1) || (!ft_strncmp(str, "C", 1)))
+	if (!ft_strncmp(str, "F", 1))
 	{
-		if (check_colors(str))
+		if (check_colors(str, &data->floor))
+			return (EXIT_FAILURE);
+		return (EXIT_SUCCESS);
+	}
+	if ((!ft_strncmp(str, "C", 1)))
+	{
+		if (check_colors(str, &data->ceiling))
 			return (EXIT_FAILURE);
 		return (EXIT_SUCCESS);
 	}
@@ -60,7 +66,7 @@ int	spec_valid_check(t_data *data)
 	i = 0;
 	while (data->textures[i])
 	{
-		if (find_texture_path_for_valid(data->textures[i]))
+		if (find_texture_path_for_valid(data->textures[i], data))
 			return (EXIT_FAILURE);
 		i++;
 	}

@@ -6,7 +6,7 @@
 /*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:05:05 by alvicina          #+#    #+#             */
-/*   Updated: 2024/03/07 17:23:37 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/03/07 18:56:19 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ typedef struct s_data
 	char		*S_text;
 	char		*E_text;
 	char		*W_text;
+	int			floor;
+	int			ceiling;
 }				t_data;
 
 typedef struct s_point
@@ -123,7 +125,7 @@ int		spec_valid_check(t_data *data);
 void	is_white_space(char **str);
 
 // modulo color_validation
-int		check_colors(char *str);
+int		check_colors(char *str, int *color);
 
 // modulo check_file_last_part
 int		check_last_part_file(t_data	*data);
@@ -175,6 +177,7 @@ double	rad2deg(double rad);
 
 // gui_init_utils.c 
 int	set_texture(char *texture, t_data *data);
+int	alloc_memory_mlx(t_data *data);
 
 
 #endif

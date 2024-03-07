@@ -6,7 +6,7 @@
 /*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 19:35:35 by afidalgo          #+#    #+#             */
-/*   Updated: 2024/03/07 17:32:18 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/03/07 19:09:06 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,7 @@ static int	charge_textures(t_data *data)
 			return (EXIT_FAILURE);
 		i++;
 	}
-	// cuando tengamos todas las texturas liberar data->textures y nos quedamos con los
-	// strings individuales con cada textura para trabajar con ellos;
+	ft_free_pointer_array(data->textures);
 	if (get_addr(data, x))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);	
@@ -91,8 +90,10 @@ static int	get_addr(t_data *data, int x)
 {
 	data->mlx->N_img = mlx_xpm_file_to_image(data->mlx->mlx_ptr, data->S_text,
 		&x, &x);
-	data->mlx->N_addr = mlx_get_data_addr(data->mlx->N_img, 
-		&data->mlx->img_data_N.bits_per_pixel, &data->mlx->img_data_N.line_len,
+	data->mlx->img_data_N.pixels = mlx_get_data_addr(
+		data->mlx->N_img, 
+		&data->mlx->img_data_N.bits_per_pixel,
+		&data->mlx->img_data_N.line_len,
 		&data->mlx->img_data_N.endian);
 	data->mlx->S_img = mlx_xpm_file_to_image(data->mlx->mlx_ptr, data->N_text,
 		&x, &x);
