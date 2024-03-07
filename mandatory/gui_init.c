@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gui_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: afidalgo <afidalgo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 19:35:35 by afidalgo          #+#    #+#             */
-/*   Updated: 2024/03/07 19:09:06 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/03/07 19:22:33 by afidalgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,17 +97,17 @@ static int	get_addr(t_data *data, int x)
 		&data->mlx->img_data_N.endian);
 	data->mlx->S_img = mlx_xpm_file_to_image(data->mlx->mlx_ptr, data->N_text,
 		&x, &x);
-	data->mlx->S_addr = mlx_get_data_addr(data->mlx->S_img, 
+	data->mlx->img_data_S.pixels = mlx_get_data_addr(data->mlx->S_img, 
 		&data->mlx->img_data_S.bits_per_pixel, &data->mlx->img_data_S.line_len, 
 		&data->mlx->img_data_S.endian);
 	data->mlx->E_img = mlx_xpm_file_to_image(data->mlx->mlx_ptr, data->W_text,
 		&x, &x);
-	data->mlx->E_addr = mlx_get_data_addr(data->mlx->E_img, 
+	data->mlx->img_data_E.pixels = mlx_get_data_addr(data->mlx->E_img, 
 		&data->mlx->img_data_E.bits_per_pixel, &data->mlx->img_data_E.line_len, 
 		&data->mlx->img_data_E.endian);
 	data->mlx->W_img = mlx_xpm_file_to_image(data->mlx->mlx_ptr, data->E_text,
 		&x, &x);
-	data->mlx->W_addr = mlx_get_data_addr(data->mlx->W_img, 
+	data->mlx->img_data_W.pixels = mlx_get_data_addr(data->mlx->W_img, 
 		&data->mlx->img_data_W.bits_per_pixel, &data->mlx->img_data_W.line_len, 
 		&data->mlx->img_data_W.endian);
 	return (EXIT_SUCCESS);

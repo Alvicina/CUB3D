@@ -3,26 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   map_render.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: afidalgo <afidalgo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 09:54:57 by afidalgo          #+#    #+#             */
-/*   Updated: 2024/03/05 19:36:19 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/03/07 19:20:46 by afidalgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 
-static void	render_ceiling_and_floor(t_data *data);
+static void	render_ceiling(t_data *data);
+static void	render_floor(t_data *data);
 static void	render_walls(t_data *data);
 
 void	render_map(t_data *data)
 {
-	render_ceiling_and_floor(data);
+	render_ceiling(data);
+	render_floor(data);
 	render_walls(data);
 	mlx_put_image_to_window(data->mlx->mlx_ptr, data->mlx->win_ptr, data->mlx->img_ptr, 0, 0);
 }
 
-static void	render_ceiling_and_floor(t_data *data)
+static void	render_ceiling(t_data *data)
 {
 	int	i;
 	int	j;
@@ -35,17 +37,25 @@ static void	render_ceiling_and_floor(t_data *data)
 		j = 0;
 		while (j < WIN_WIDTH)
 		{
-			draw_pixel(data->mlx, j, i, 0x0000FF); // TODO: Cambiar por el color del techo
+			draw_pixel(data->mlx, j, i, data->ceiling);
 			j++;
 		}
 		i++;
 	}
+}
+
+static void	render_floor(t_data *data)
+{
+	int	i;
+	int	j;
+
+	i = WIN_HEIGHT / 2;
 	while (i < WIN_HEIGHT)
 	{
 		j = 0;
 		while (j < WIN_WIDTH)
 		{
-			draw_pixel(data->mlx, j, i, 0x00FF00); // TODO: Cambiar por el color del suelo
+			draw_pixel(data->mlx, j, i, data->floor);
 			j++;
 		}
 		i++;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: afidalgo <afidalgo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:05:05 by alvicina          #+#    #+#             */
-/*   Updated: 2024/03/07 18:56:19 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/03/07 19:24:09 by afidalgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,18 +60,14 @@ typedef struct s_mlx
 	void		*win_ptr;
 	void		*img_ptr;
 	t_img_data	img_data;
-	t_img_data	img_data_N;
-	t_img_data	img_data_S;
-	t_img_data	img_data_E;
-	t_img_data	img_data_W;
 	void		*N_img;
-	char		*N_addr;
+	t_img_data	img_data_N;
 	void		*S_img;
-	char		*S_addr;
+	t_img_data	img_data_S;
 	void		*E_img;
-	char		*E_addr;
+	t_img_data	img_data_E;
 	void		*W_img;
-	char		*W_addr;
+	t_img_data	img_data_W;
 }				t_mlx;
 
 typedef struct s_data
