@@ -6,7 +6,7 @@
 /*   By: afidalgo <afidalgo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:05:05 by alvicina          #+#    #+#             */
-/*   Updated: 2024/03/07 19:24:09 by afidalgo         ###   ########.fr       */
+/*   Updated: 2024/03/08 17:37:49 by afidalgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # define WIN_WIDTH 1000
 # define WIN_HEIGHT 750
 # define TILE_LEN 64
+# define TEXTURE_LEN 64
 # define POV_DEG 60
 
 # define KEY_A 0
@@ -86,11 +87,20 @@ typedef struct s_data
 	int			ceiling;
 }				t_data;
 
-typedef struct s_point
+typedef enum e_texture_dir
 {
-	int	x;
-	int	y;
-}		t_point;
+	NORTH,
+	EAST,
+	SOUTH,
+	WEST
+}	t_texture_dir;
+
+typedef struct s_wall
+{
+	double			x;
+	double			y;
+	t_texture_dir	dir;
+}					t_wall;
 
 typedef enum e_direction
 {
@@ -157,7 +167,7 @@ void	turn_pov(t_data *data, t_direction dir);
 
 // map_walls.c
 int		is_next_step_a_wall(t_data *data, double dir_rad);
-double	get_distance_to_wall(t_data *data, double x, double y, double dir_deg, int depth);
+t_wall	get_distance_to_wall(t_data *data, double x, double y, double dir_deg, int depth);
 int		is_coord_a_wall(t_data *data, double x, double y);
 
 // map_render.c
@@ -174,6 +184,5 @@ double	rad2deg(double rad);
 // gui_init_utils.c 
 int	set_texture(char *texture, t_data *data);
 int	alloc_memory_mlx(t_data *data);
-
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_walls.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: afidalgo <afidalgo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 09:42:38 by afidalgo          #+#    #+#             */
-/*   Updated: 2024/03/06 19:15:55 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/03/08 19:21:37 by afidalgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	is_coord_a_wall(t_data *data, double x, double y)
 	return (0);
 }
 
-double	get_distance_to_wall(t_data *data, double x, double y, double dir_deg, int depth)
+t_wall	get_distance_to_wall(t_data *data, double x, double y, double dir_deg, int depth)
 {
 	double	dir_rad;
 	double	distance_top;
@@ -74,16 +74,15 @@ double	get_distance_to_wall(t_data *data, double x, double y, double dir_deg, in
 	double	top_left_angle;
 	double	bottom_left_angle;
 	double	bottom_right_angle;
-	double	wall_x;
-	double	wall_y;
-	int		wall_x_round;
-	int		wall_y_round;
-	double	distance_to_wall_x;
-	double	distance_to_wall_y;
-	double	fish_eye;
+	// double	wall_x;
+	// double	wall_y;
+	// double	distance_to_wall_x;
+	// double	distance_to_wall_y;
+	// double	fish_eye;
+	t_wall	wall;
 
-	wall_x = -1.0;
-	wall_y = -1.0;
+	wall.x = -1.0;
+	wall.y = -1.0;
 	if (dir_deg >= 360)
 		dir_deg -= 360;
 	if (dir_deg < 0)
@@ -96,17 +95,6 @@ double	get_distance_to_wall(t_data *data, double x, double y, double dir_deg, in
 	// printf("(x, y) = (%d, %d)\n", x, y);
 	if (fmod(y, TILE_LEN) == 0)
 	{
-		// if (dir_deg == 180)
-		// {
-		// 	wall_y = y;
-		// 	wall_x = x - distance_left;
-		// }
-		// else if (dir_deg == 0)
-		// {
-		// 	wall_y = y;
-		// 	wall_x = x + distance_right;
-		// }
-		// else 
 		if (dir_deg < 180)
 		{
 			distance_top = TILE_LEN;
@@ -121,17 +109,6 @@ double	get_distance_to_wall(t_data *data, double x, double y, double dir_deg, in
 
 	if (fmod (x, TILE_LEN) == 0)
 	{
-		// if (dir_deg == 90)
-		// {
-		// 	wall_x = x;
-		// 	wall_y = y - distance_top;
-		// }
-		// else if (dir_deg == 270)
-		// {
-		// 	wall_x = x;
-		// 	wall_y = y + distance_bottom;
-		// }
-		// else 
 		if (dir_deg < 90 || dir_deg > 270)
 		{
 			distance_left = 0;
@@ -158,51 +135,55 @@ double	get_distance_to_wall(t_data *data, double x, double y, double dir_deg, in
 	// printf("bottom_right_angle = %f %f\n", bottom_right_angle, rad2deg(bottom_right_angle));
 
 	if (dir_rad == top_right_angle || dir_rad == top_left_angle)
-		wall_y = y - distance_top;
+		wall.y = y - distance_top;
 	else if (dir_rad == bottom_right_angle || dir_rad == bottom_left_angle)
-		wall_y = y + distance_bottom;
+		wall.y = y + distance_bottom;
 	if (dir_rad == top_right_angle || dir_rad == bottom_right_angle)
-		wall_x = x + distance_right;
+		wall.x = x + distance_right;
 	else if (dir_rad == top_left_angle || dir_rad == bottom_left_angle)
-		wall_x = x - distance_left;
+		wall.x = x - distance_left;
 	
-	if (wall_x == -1.0 || wall_y == -1.0)
+	if (wall.x == -1.0 || wall.y == -1.0)
 	{
 		if (dir_rad >= bottom_right_angle || dir_rad <= top_right_angle) //* Nos movemos a la derecha.
 		{
 			// printf("corta derecha\n");
-			wall_x = x + distance_right;
+			wall.dir = WEST;
+			wall.x = x + distance_right;
 			if (dir_deg > 180)
-				wall_y = y - (tan(dir_rad) * distance_right); // arriba
+				wall.y = y - (tan(dir_rad) * distance_right); // arriba
 			else
-				wall_y = y + (tan(deg2rad(360 - dir_deg)) * distance_right); // abajo
+				wall.y = y + (tan(deg2rad(360 - dir_deg)) * distance_right); // abajo
 		}
 		else if (dir_rad <= top_left_angle) //* Nos movemos hacia arriba.
 		{
 			// printf("corta arriba\n");
-			wall_y = y - distance_top;
+			wall.dir = SOUTH;
+			wall.y = y - distance_top;
 			if (dir_deg > 90)
-				wall_x = x - (tan(deg2rad(dir_deg - 90)) * distance_top);// izquierda
+				wall.x = x - (tan(deg2rad(dir_deg - 90)) * distance_top);// izquierda
 			else
-				wall_x = x + (tan(deg2rad(90 - dir_deg)) * distance_top); // derecha
+				wall.x = x + (tan(deg2rad(90 - dir_deg)) * distance_top); // derecha
 		}
 		else if (dir_rad <= bottom_left_angle) //* Nos movemos a la izquierda.
 		{
 			// printf("corta izquierda\n");
-			wall_x = x - distance_left;
+			wall.dir = EAST;
+			wall.x = x - distance_left;
 			if (dir_deg > 180)
-				wall_y = y - (tan(deg2rad(180 - dir_deg)) * distance_left); // arriba
+				wall.y = y - (tan(deg2rad(180 - dir_deg)) * distance_left); // arriba
 			else
-				wall_y = y + (tan(deg2rad(dir_deg - 180)) * distance_left); // abajo
+				wall.y = y + (tan(deg2rad(dir_deg - 180)) * distance_left); // abajo
 		}
 		else if (dir_rad <= bottom_right_angle) //* Nos movemos hacia abajo.
 		{
 			// printf("corta abajo\n");
-			wall_y = y + distance_bottom;
+			wall.dir = NORTH;
+			wall.y = y + distance_bottom;
 			if (dir_deg < 270)
-				wall_x = x - (tan(deg2rad(270 - dir_deg)) * distance_bottom); // izquierda
+				wall.x = x - (tan(deg2rad(270 - dir_deg)) * distance_bottom); // izquierda
 			else
-				wall_x = x + (tan(deg2rad(dir_deg - 270)) * distance_bottom); // derecha
+				wall.x = x + (tan(deg2rad(dir_deg - 270)) * distance_bottom); // derecha
 		}
 		else
 		{
@@ -212,22 +193,19 @@ double	get_distance_to_wall(t_data *data, double x, double y, double dir_deg, in
 		}
 	}
 	
-
-	wall_x_round = round(wall_x);
-	wall_y_round = round(wall_y);
-	//printf("(wall_x, wall_y) = (%f, %f) (%d, %d)\n", wall_x, wall_y, wall_x_round, wall_y_round);
-	if (is_coord_a_wall(data, wall_x, wall_y)/*wall_x_round, wall_y_round*/)
+	//printf("(wall_x, wall_y) = (%f, %f) (%d, %d)\n", wall.x, wall_y, wall_x_round, wall_y_round);
+	if (is_coord_a_wall(data, wall.x, wall.y))
 	{
 		// TODO: Esto hace efecto ojo de pez
-		distance_to_wall_x = fabs(data->player->x - wall_x);
-		distance_to_wall_y = fabs(data->player->y - wall_y);
-		fish_eye = sqrt(pow(distance_to_wall_x, 2) + pow(distance_to_wall_y, 2)); // Teorema de Pitagoras
-		return (cos(fabs(deg2rad(data->player->dir) - dir_rad)) * fish_eye);
+		// distance_to_wall_x = fabs(data->player->x - wall.x);
+		// distance_to_wall_y = fabs(data->player->y - wall.y);
+		// fish_eye = sqrt(pow(distance_to_wall_x, 2) + pow(distance_to_wall_y, 2)); // Teorema de Pitagoras
+		// return (cos(fabs(deg2rad(data->player->dir) - dir_rad)) * fish_eye);
+		return (wall);
 	}
 	else
 	{
 		// if (depth <= 1)
-			return (get_distance_to_wall(data, wall_x, wall_y, dir_deg, depth + 1));
+		return (get_distance_to_wall(data, wall.x, wall.y, dir_deg, depth + 1));
 	}
-	return (0);
 }

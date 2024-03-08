@@ -3,15 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   player_init.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: afidalgo <afidalgo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 19:29:14 by afidalgo          #+#    #+#             */
-/*   Updated: 2024/03/06 18:29:20 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/03/08 17:46:22 by afidalgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
-/*
+
 static void	get_player_dir(t_data *data, char c)
 {
 	if (c == 'N')
@@ -50,9 +50,9 @@ int	init_player(t_data *data)
 	}
 	return (EXIT_SUCCESS);
 }
-*/
 
-int	init_player(t_data *data)
+
+/*int	init_player(t_data *data)
 {
 	data->player = malloc(sizeof(t_player));
 	if (data->player == NULL)
@@ -65,4 +65,4 @@ int	init_player(t_data *data)
 	data->player->y = 841;
 	data->player->dir = 10;
 	return (EXIT_SUCCESS);
-}
+}*/
