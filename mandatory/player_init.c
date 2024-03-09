@@ -6,7 +6,7 @@
 /*   By: afidalgo <afidalgo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 19:29:14 by afidalgo          #+#    #+#             */
-/*   Updated: 2024/03/08 17:46:22 by afidalgo         ###   ########.fr       */
+/*   Updated: 2024/03/09 09:58:21 by afidalgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,8 @@ int	init_player(t_data *data)
 	return (EXIT_SUCCESS);
 }
 
-
-/*int	init_player(t_data *data)
+/*
+int	init_player(t_data *data)
 {
 	data->player = malloc(sizeof(t_player));
 	if (data->player == NULL)
@@ -61,8 +61,8 @@ int	init_player(t_data *data)
 	// data->player->x = 96;
 	// data->player->y = 96;
 	// data->player->dir = 0;
-	data->player->x = 147;
-	data->player->y = 841;
-	data->player->dir = 10;
+	data->player->x = 352;
+	data->player->y = 352;
+	data->player->dir = 195;
 	return (EXIT_SUCCESS);
 }*/

@@ -6,7 +6,7 @@
 /*   By: afidalgo <afidalgo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 09:54:57 by afidalgo          #+#    #+#             */
-/*   Updated: 2024/03/08 19:27:35 by afidalgo         ###   ########.fr       */
+/*   Updated: 2024/03/09 11:10:24 by afidalgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,6 @@ static void	render_walls(t_data *data)
 	win_dir_ratio = (double) POV_DEG / (double) WIN_WIDTH;
 	i = 0;
 	while (i < WIN_WIDTH)
-	// while (i < 1)
 	{
 		ray_dir_deg = (data->player->dir + (POV_DEG / 2)) - (i * win_dir_ratio);
 		wall = get_distance_to_wall(
@@ -96,20 +95,11 @@ static void	render_walls(t_data *data)
 		distance_to_wall_y = fabs(data->player->y - wall.y);
 		fish_eye = sqrt(pow(distance_to_wall_x, 2) + pow(distance_to_wall_y, 2)); // Teorema de Pitagoras
 		distance_to_wall = (cos(fabs(deg2rad(data->player->dir) - deg2rad(ray_dir_deg))) * fish_eye);
-
-		// distance_to_wall = get_distance_to_wall(
-		// 	data,
-		// 	data->player->x,
-		// 	data->player->y,
-		// 	(data->player->dir + (POV_DEG / 2)) - (i * win_dir_ratio), 0);
 		wall_v_distance = (WIN_HEIGHT * 64) / distance_to_wall;
-		// if (wall_v_distance > WIN_HEIGHT)
-			// wall_v_distance = WIN_HEIGHT;
 		if (wall_v_distance > WIN_HEIGHT)
 			wall_v_distance_offset = 0;
 		else	
 			wall_v_distance_offset = round((WIN_HEIGHT - wall_v_distance) / 2);
-
 		if (wall.dir == NORTH)
 			texture = data->mlx->img_data_N;
 		else if (wall.dir == SOUTH)
@@ -118,46 +108,28 @@ static void	render_walls(t_data *data)
 			texture = data->mlx->img_data_E;
 		else if (wall.dir == WEST)
 			texture = data->mlx->img_data_W;
-		
 		texture_step = TEXTURE_LEN / wall_v_distance;
 		j = 0;
 		if (wall_v_distance > WIN_HEIGHT)
 			k = (wall_v_distance - WIN_HEIGHT) / 2;
 		else
 			k = 0;
-		//printf("texture.line_len = %d bytes = %d\n", texture.line_len, texture.bits_per_pixel / 8);
 		while (j < wall_v_distance && j < WIN_HEIGHT)
 		{
 			texture_pixel_index = floor(k * texture_step) * texture.line_len;
-			// printf("texture_pixel_index = %d\n", texture_pixel_index);
-			if (fmod(wall.x, 64) == 0)
-			{
-				if (wall.dir == WEST)
-					texture_pixel_index += floor(fmod(wall.y, 64)) * (texture.bits_per_pixel / 8);
-				else
-					texture_pixel_index = texture_pixel_index + texture.line_len - floor(fmod(wall.y, 64)) * (texture.bits_per_pixel / 8);
-			}
-			else
-			{
-				if (wall.dir == SOUTH)
-					texture_pixel_index += floor(fmod(wall.x, 64)) * (texture.bits_per_pixel / 8);
-				else
-					texture_pixel_index = texture_pixel_index + texture.line_len - floor(fmod(wall.x, 64)) * (texture.bits_per_pixel / 8);
-			}
-				
-			//printf("texture_pixel_index = %d\n", texture_pixel_index);
+			if (wall.dir == WEST)
+				texture_pixel_index += floor(fmod(wall.y, 64)) * (texture.bits_per_pixel / 8);
+			else if (wall.dir == EAST)
+				texture_pixel_index += texture.line_len - ceil(fmod(wall.y, 64)) * (texture.bits_per_pixel / 8);
+			else if (wall.dir == SOUTH)
+				texture_pixel_index += floor(fmod(wall.x, 64)) * (texture.bits_per_pixel / 8);
+			else if (wall.dir == NORTH)
+				texture_pixel_index += texture.line_len - ceil(fmod(wall.x, 64)) * (texture.bits_per_pixel / 8);
 			texture_color = *((unsigned int *) (texture_pixel_index + texture.pixels));
 			draw_pixel(data->mlx, i, wall_v_distance_offset + j, texture_color);
 			j++;
 			k++;
 		}
-
-		// j = 0;
-		// while (j < wall_v_distance)
-		// {
-		// 	draw_pixel(data->mlx, i, round(wall_v_distance_offset) + j, 0xFF0000);
-		// 	j++;
-		// }
 		i++;
 	}
 }
