@@ -6,23 +6,25 @@
 /*   By: afidalgo <afidalgo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 09:54:57 by afidalgo          #+#    #+#             */
-/*   Updated: 2024/03/03 10:48:38 by afidalgo         ###   ########.fr       */
+/*   Updated: 2024/03/09 11:10:24 by afidalgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 
-static void	render_ceiling_and_floor(t_data *data);
+static void	render_ceiling(t_data *data);
+static void	render_floor(t_data *data);
 static void	render_walls(t_data *data);
 
 void	render_map(t_data *data)
 {
-	render_ceiling_and_floor(data);
+	render_ceiling(data);
+	render_floor(data);
 	render_walls(data);
 	mlx_put_image_to_window(data->mlx->mlx_ptr, data->mlx->win_ptr, data->mlx->img_ptr, 0, 0);
 }
 
-static void	render_ceiling_and_floor(t_data *data)
+static void	render_ceiling(t_data *data)
 {
 	int	i;
 	int	j;
@@ -35,17 +37,25 @@ static void	render_ceiling_and_floor(t_data *data)
 		j = 0;
 		while (j < WIN_WIDTH)
 		{
-			draw_pixel(data->mlx, j, i, 0x0000FF); // TODO: Cambiar por el color del techo
+			draw_pixel(data->mlx, j, i, data->ceiling);
 			j++;
 		}
 		i++;
 	}
+}
+
+static void	render_floor(t_data *data)
+{
+	int	i;
+	int	j;
+
+	i = WIN_HEIGHT / 2;
 	while (i < WIN_HEIGHT)
 	{
 		j = 0;
 		while (j < WIN_WIDTH)
 		{
-			draw_pixel(data->mlx, j, i, 0x00FF00); // TODO: Cambiar por el color del suelo
+			draw_pixel(data->mlx, j, i, data->floor);
 			j++;
 		}
 		i++;
@@ -56,29 +66,69 @@ static void	render_walls(t_data *data)
 {
 	int	i;
 	int	j;
+	int	k;
 	double	distance_to_wall;
 	double	wall_v_distance;
-	double	wall_v_distance_offset;
+	int	wall_v_distance_offset;
 	double	win_dir_ratio;
+	t_wall	wall;
+	double	distance_to_wall_x;
+	double	distance_to_wall_y;
+	double	fish_eye;
+	double	ray_dir_deg;
+	t_img_data	texture;
+	int			texture_color;
+	int			texture_pixel_index;
+	double		texture_step;
 
 	win_dir_ratio = (double) POV_DEG / (double) WIN_WIDTH;
 	i = 0;
 	while (i < WIN_WIDTH)
 	{
-		distance_to_wall = get_distance_to_wall(
+		ray_dir_deg = (data->player->dir + (POV_DEG / 2)) - (i * win_dir_ratio);
+		wall = get_distance_to_wall(
 			data,
 			data->player->x,
 			data->player->y,
-			(data->player->dir + (POV_DEG / 2)) - (i * win_dir_ratio));
-		wall_v_distance = (WIN_HEIGHT * 20) / distance_to_wall;
+			ray_dir_deg, 0);
+		distance_to_wall_x = fabs(data->player->x - wall.x);
+		distance_to_wall_y = fabs(data->player->y - wall.y);
+		fish_eye = sqrt(pow(distance_to_wall_x, 2) + pow(distance_to_wall_y, 2)); // Teorema de Pitagoras
+		distance_to_wall = (cos(fabs(deg2rad(data->player->dir) - deg2rad(ray_dir_deg))) * fish_eye);
+		wall_v_distance = (WIN_HEIGHT * 64) / distance_to_wall;
 		if (wall_v_distance > WIN_HEIGHT)
-			wall_v_distance = WIN_HEIGHT;
-		wall_v_distance_offset = (WIN_HEIGHT - wall_v_distance) / 2;
+			wall_v_distance_offset = 0;
+		else	
+			wall_v_distance_offset = round((WIN_HEIGHT - wall_v_distance) / 2);
+		if (wall.dir == NORTH)
+			texture = data->mlx->img_data_N;
+		else if (wall.dir == SOUTH)
+			texture = data->mlx->img_data_S;
+		else if (wall.dir == EAST)
+			texture = data->mlx->img_data_E;
+		else if (wall.dir == WEST)
+			texture = data->mlx->img_data_W;
+		texture_step = TEXTURE_LEN / wall_v_distance;
 		j = 0;
-		while (j < wall_v_distance)
+		if (wall_v_distance > WIN_HEIGHT)
+			k = (wall_v_distance - WIN_HEIGHT) / 2;
+		else
+			k = 0;
+		while (j < wall_v_distance && j < WIN_HEIGHT)
 		{
-			draw_pixel(data->mlx, i, round(wall_v_distance_offset) + j, 0xFF0000);
+			texture_pixel_index = floor(k * texture_step) * texture.line_len;
+			if (wall.dir == WEST)
+				texture_pixel_index += floor(fmod(wall.y, 64)) * (texture.bits_per_pixel / 8);
+			else if (wall.dir == EAST)
+				texture_pixel_index += texture.line_len - ceil(fmod(wall.y, 64)) * (texture.bits_per_pixel / 8);
+			else if (wall.dir == SOUTH)
+				texture_pixel_index += floor(fmod(wall.x, 64)) * (texture.bits_per_pixel / 8);
+			else if (wall.dir == NORTH)
+				texture_pixel_index += texture.line_len - ceil(fmod(wall.x, 64)) * (texture.bits_per_pixel / 8);
+			texture_color = *((unsigned int *) (texture_pixel_index + texture.pixels));
+			draw_pixel(data->mlx, i, wall_v_distance_offset + j, texture_color);
 			j++;
+			k++;
 		}
 		i++;
 	}

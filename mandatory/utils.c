@@ -6,7 +6,7 @@
 /*   By: afidalgo <afidalgo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 19:23:25 by afidalgo          #+#    #+#             */
-/*   Updated: 2024/02/27 19:44:05 by afidalgo         ###   ########.fr       */
+/*   Updated: 2024/03/03 14:21:10 by afidalgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,12 @@ int	terminate(t_data *data)
 	exit(EXIT_SUCCESS);
 }
 
-double deg2rad(int deg)
+double deg2rad(double deg)
 {
 	return ((deg * PI) / 180);
+}
+
+double rad2deg(double rad)
+{
+	return (rad * (180 / PI));
 }
