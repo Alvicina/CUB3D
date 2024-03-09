@@ -3,14 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afidalgo <afidalgo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 19:23:25 by afidalgo          #+#    #+#             */
-/*   Updated: 2024/03/03 14:21:10 by afidalgo         ###   ########.fr       */
+/*   Updated: 2024/03/09 12:07:10 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
+
+void free_massive(t_data *data)
+{
+	ft_free_pointer_array(data->textures);
+	ft_free_pointer_array(data->map_only);
+	ft_free_pointer_array(data->map_spec);
+	mlx_destroy_image(data->mlx->mlx_ptr, data->mlx->img_ptr);
+	mlx_destroy_window(data->mlx->mlx_ptr, data->mlx->win_ptr);
+	free(data->mlx->mlx_ptr);
+	free(data->mlx);
+	free(data->N_text);
+	free(data->S_text);
+	free(data->E_text);
+	free(data->W_text);
+}
 
 int	terminate(t_data *data)
 {
@@ -21,6 +36,10 @@ int	terminate(t_data *data)
 	mlx_destroy_window(data->mlx->mlx_ptr, data->mlx->win_ptr);
 	free(data->mlx->mlx_ptr);
 	free(data->mlx);
+	free(data->N_text);
+	free(data->S_text);
+	free(data->E_text);
+	free(data->W_text);
 	exit(EXIT_SUCCESS);
 }
 

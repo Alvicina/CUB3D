@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afidalgo <afidalgo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:05:05 by alvicina          #+#    #+#             */
-/*   Updated: 2024/03/08 17:37:49 by afidalgo         ###   ########.fr       */
+/*   Updated: 2024/03/09 12:07:31 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,9 +180,12 @@ void	draw_pixel(t_mlx *mlx, int x, int y, int color);
 int		terminate(t_data *data);
 double	deg2rad(double deg);
 double	rad2deg(double rad);
+void 	free_massive(t_data *data);
 
 // gui_init_utils.c 
-int	set_texture(char *texture, t_data *data);
-int	alloc_memory_mlx(t_data *data);
+int		set_texture(char *texture, t_data *data);
+int		alloc_memory_mlx(t_data *data);
+void	check_free(t_data *data);
+void	init_textures(t_data *data);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gui_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afidalgo <afidalgo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 19:35:35 by afidalgo          #+#    #+#             */
-/*   Updated: 2024/03/08 19:23:14 by afidalgo         ###   ########.fr       */
+/*   Updated: 2024/03/09 11:55:15 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,13 +74,16 @@ static int	charge_textures(t_data *data)
 	
 	x = 64;
 	i = 0;
+	init_textures(data);
 	while (data->textures[i])
 	{
 		if (set_texture(data->textures[i], data))
+		{
+			check_free(data);
 			return (EXIT_FAILURE);
+		}
 		i++;
 	}
-	ft_free_pointer_array(data->textures);
 	if (get_addr(data, x))
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);	

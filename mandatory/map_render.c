@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_render.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afidalgo <afidalgo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 09:54:57 by afidalgo          #+#    #+#             */
-/*   Updated: 2024/03/09 11:10:24 by afidalgo         ###   ########.fr       */
+/*   Updated: 2024/03/09 14:02:45 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ static void	render_walls(t_data *data)
 	double	fish_eye;
 	double	ray_dir_deg;
 	t_img_data	texture;
-	int			texture_color;
+	unsigned int			texture_color;
 	int			texture_pixel_index;
 	double		texture_step;
 
@@ -117,6 +117,7 @@ static void	render_walls(t_data *data)
 		while (j < wall_v_distance && j < WIN_HEIGHT)
 		{
 			texture_pixel_index = floor(k * texture_step) * texture.line_len;
+			//printf("index arriba:%d k:%d step:%f linelen:%d wall_v_dist:%f i:%d\n", texture_pixel_index, k, texture_step, texture.line_len, wall_v_distance, i);
 			if (wall.dir == WEST)
 				texture_pixel_index += floor(fmod(wall.y, 64)) * (texture.bits_per_pixel / 8);
 			else if (wall.dir == EAST)
@@ -125,6 +126,7 @@ static void	render_walls(t_data *data)
 				texture_pixel_index += floor(fmod(wall.x, 64)) * (texture.bits_per_pixel / 8);
 			else if (wall.dir == NORTH)
 				texture_pixel_index += texture.line_len - ceil(fmod(wall.x, 64)) * (texture.bits_per_pixel / 8);
+			//printf("index abajo:%d wall.dir:%d wall.x:%f wal.y:%f\n", texture_pixel_index, wall.dir, wall.x, wall.y);
 			texture_color = *((unsigned int *) (texture_pixel_index + texture.pixels));
 			draw_pixel(data->mlx, i, wall_v_distance_offset + j, texture_color);
 			j++;

@@ -6,7 +6,7 @@
 /*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:51:10 by alvicina          #+#    #+#             */
-/*   Updated: 2024/03/06 19:03:40 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/03/09 12:41:53 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,8 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	}
 	set_event_hooks(&data);
-	init_player(&data);
+	if (init_player(&data))
+		free_massive(&data);
 	render_map(&data);
 
 	// i = data.player->dir + 2;

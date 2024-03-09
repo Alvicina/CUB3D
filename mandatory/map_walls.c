@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_walls.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afidalgo <afidalgo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 09:42:38 by afidalgo          #+#    #+#             */
-/*   Updated: 2024/03/09 11:12:24 by afidalgo         ###   ########.fr       */
+/*   Updated: 2024/03/09 14:00:10 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,25 +116,29 @@ t_wall	get_distance_to_wall(t_data *data, double x, double y, double dir_deg, in
 	{
 		wall.y = y - distance_top;
 		wall.x = x + distance_right;
-		wall.dir = WEST;
+		//wall.dir = WEST;
+		wall.dir = SOUTH;
 	}
 	else if (dir_rad == top_left_angle)
 	{
 		wall.y = y - distance_top;
 		wall.x = x - distance_left;
-		wall.dir = SOUTH;
+		//wall.dir = SOUTH;
+		wall.dir = EAST;
 	}
 	else if (dir_rad == bottom_left_angle)
 	{
 		wall.y = y + distance_bottom;
 		wall.x = x - distance_left;
-		wall.dir = EAST;
+		//wall.dir = EAST;
+		wall.dir = NORTH;
 	}
 	else if (dir_rad == bottom_right_angle)
 	{
 		wall.y = y + distance_bottom;
 		wall.x = x + distance_right;
-		wall.dir = NORTH;
+		//wall.dir = NORTH;
+		wall.dir = WEST;
 	}
 	if (wall.x == -1.0 || wall.y == -1.0)
 	{

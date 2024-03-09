@@ -6,11 +6,31 @@
 /*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/07 16:33:12 by alvicina          #+#    #+#             */
-/*   Updated: 2024/03/07 19:03:00 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/03/09 11:51:17 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
+
+void	check_free(t_data *data)
+{
+	if (!data->N_text)
+		free(data->N_text);
+	if (!data->S_text)
+		free(data->S_text);
+	if (!data->W_text)
+		free(data->W_text);
+	if (!data->E_text)
+		free(data->E_text);
+}
+
+void	init_textures(t_data *data)
+{
+	data->N_text = NULL;
+	data->S_text = NULL;
+	data->W_text = NULL;
+	data->E_text = NULL;
+}
 
 static int	charge_image(char *texture, char **text_path)
 {
