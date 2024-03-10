@@ -6,7 +6,7 @@
 #    By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/15 16:37:55 by alvicina          #+#    #+#              #
-#    Updated: 2024/03/09 13:42:07 by alvicina         ###   ########.fr        #
+#    Updated: 2024/03/10 12:22:06 by alvicina         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ MPATH_SRCS  = main_copy_file.c utils_copy_file_map_position.c check_map_position
 			  color_validation.c check_file_last_part.c map_validation.c map_validation_utils.c \
 			  make_square_map.c check_player_and_left.c gui_init.c player_init.c player_movement.c \
 			  player_direction.c gui_event_handler.c map_walls.c map_render.c mlx_utils.c utils.c \
-			  gui_init_utils.c
+			  gui_init_utils.c get_addr_utils.c \
 
 MPATH_DIR   = mandatory/
 MPATH       = $(addprefix $(MPATH_DIR), $(MPATH_SRCS))
