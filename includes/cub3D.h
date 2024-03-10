@@ -6,7 +6,7 @@
 /*   By: afidalgo <afidalgo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:05:05 by alvicina          #+#    #+#             */
-/*   Updated: 2024/03/10 13:44:32 by afidalgo         ###   ########.fr       */
+/*   Updated: 2024/03/10 13:50:51 by afidalgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,6 +165,7 @@ int		check_player(t_data *data);
 int		check_left_close(t_data *data, int j, int i);
 // gui_init.c
 int		init_gui(t_data *data);
+int		get_addr(t_data *data, int x);
 
 // gui_event_handler.c
 void	set_event_hooks(t_data *data);
@@ -207,5 +208,11 @@ int		set_texture(char *texture, t_data *data);
 int		alloc_memory_mlx(t_data *data);
 void	check_free(t_data *data);
 void	init_textures(t_data *data);
+
+// get_addr_utils.c
+int		image_north(t_data *data, int x);
+int		image_south(t_data *data, int x);
+int		image_east(t_data *data, int x);
+int		image_west(t_data *data, int x);
 
 #endif
