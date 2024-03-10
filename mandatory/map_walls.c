@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_walls.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: afidalgo <afidalgo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 09:42:38 by afidalgo          #+#    #+#             */
-/*   Updated: 2024/03/09 14:00:10 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/03/10 13:02:25 by afidalgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ int	is_coord_a_wall(t_data *data, double x, double y)
 	return (0);
 }
 
-t_wall	get_distance_to_wall(t_data *data, double x, double y, double dir_deg, int depth)
+t_wall	get_next_wall(t_data *data, double x, double y, double dir_deg)
 {
 	double	dir_rad;
 	double	distance_top;
@@ -187,5 +187,17 @@ t_wall	get_distance_to_wall(t_data *data, double x, double y, double dir_deg, in
 	}
 	if (is_coord_a_wall(data, wall.x, wall.y))
 		return (wall);
-	return (get_distance_to_wall(data, wall.x, wall.y, dir_deg, depth + 1));
+	return (get_next_wall(data, wall.x, wall.y, dir_deg));
+}
+
+double	get_distance_to_wall(t_data *data, t_wall *wall, double dir_rad)
+{
+	double	distance_to_wall_x;
+	double	distance_to_wall_y;
+	double	diagonal_distance;
+
+	distance_to_wall_x = fabs(data->player->x - wall->x);
+	distance_to_wall_y = fabs(data->player->y - wall->y);
+	diagonal_distance = sqrt(pow(distance_to_wall_x, 2) + pow(distance_to_wall_y, 2));
+	return (cos(fabs(deg2rad(data->player->dir) - dir_rad)) * diagonal_distance);
 }

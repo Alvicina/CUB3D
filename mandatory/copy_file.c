@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main_copy_file.c                                   :+:      :+:    :+:   */
+/*   copy_file.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: afidalgo <afidalgo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 18:51:10 by alvicina          #+#    #+#             */
-/*   Updated: 2024/03/10 11:32:51 by afidalgo         ###   ########.fr       */
+/*   Updated: 2024/03/10 13:28:43 by afidalgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
 
-static int	check_arg_name(char *argv)
+int	check_arg_name(char *argv)
 {
 	size_t	i;
 
@@ -66,7 +66,7 @@ static char	*copy_file(char *argv, int size)
 	return (file);
 }
 
-static char	*get_file(char *argv)
+char	*get_file(char *argv)
 {
 	int		fd;
 	int		size;
@@ -82,59 +82,4 @@ static char	*get_file(char *argv)
 	if (file == NULL)
 		return ((perror("Could not copy file"), NULL));
 	return (file);
-}
-
-int	main(int argc, char **argv)
-{
-	t_data	data;
-	//double distance;
-	//double i;
-	
-	if (check_number_args(argc))
-		return (EXIT_FAILURE);
-	if (check_arg_name(argv[1]))
-		return (EXIT_FAILURE);
-	data.file = get_file(argv[1]);
-	if (data.file == NULL)
-		return (EXIT_FAILURE);
-	data.file = replace_chars(data.file, "\t\v\f\r", ' ');
-	if (get_data(&data))
-	{
-		ft_free_pointer_array(data.map_spec);
-		return (EXIT_FAILURE);
-	}
-	if (init_gui(&data) == EXIT_FAILURE)
-	{
-		ft_free_pointer_array(data.textures);
-		ft_free_pointer_array(data.map_only);
-		ft_free_pointer_array(data.map_spec);
-		return (EXIT_FAILURE);
-	}
-	set_event_hooks(&data);
-	if (init_player(&data) == EXIT_FAILURE)
-		free_massive(&data);
-	render_map(&data);
-
-	// i = data.player->dir + 2;
-	// while (i >= data.player->dir)
-	// {
-	// 	distance = get_distance_to_wall(&data, data.player->x, data.player->y, i, 0);
-	// 	printf("distance = %f dir = %f\n", distance, i);
-	// 	i -= 0.1;
-	// }
-	// printf("\n\n");
-	// distance = get_distance_to_wall(&data, data.player->x, data.player->y, 11.7, 0);
-	// printf("distance = %f dir = %f\n\n\n", distance, 11.7);
-	// distance = get_distance_to_wall(&data, data.player->x, data.player->y, 11.6, 0);
-	// printf("distance = %f dir = %f\n\n\n", distance, 11.6);
-	// distance = get_distance_to_wall(&data, data.player->x, data.player->y, 11.2, 0);
-	// printf("distance = %f dir = %f\n\n\n", distance, 11.2);
-	// distance = get_distance_to_wall(&data, data.player->x, data.player->y, 11.0, 0);
-	// printf("distance = %f dir = %f\n\n\n", distance, 11.0);
-	// distance = get_distance_to_wall(&data, data.player->x, data.player->y, 10.6, 0);
-	// printf("distance = %f dir = %f\n\n\n", distance, 10.6);
-
-	mlx_loop(data.mlx->mlx_ptr);
-
-	return (EXIT_SUCCESS);
 }

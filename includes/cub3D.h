@@ -6,7 +6,7 @@
 /*   By: afidalgo <afidalgo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:05:05 by alvicina          #+#    #+#             */
-/*   Updated: 2024/03/10 10:33:49 by afidalgo         ###   ########.fr       */
+/*   Updated: 2024/03/10 13:44:32 by afidalgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,14 @@ typedef struct s_wall
 	double			x;
 	double			y;
 	t_texture_dir	dir;
+	double			height;
+	int				offset;
+	t_img_data		*texture;
 }					t_wall;
+
+// copy_fie.c
+int		check_arg_name(char *argv);
+char	*get_file(char *argv);
 
 // modulo utils_copy_file_map_position
 void	ft_message(char *str);
@@ -170,15 +177,21 @@ void	move(t_data *data, t_direction dir);
 
 // player_direction.c
 void	turn_pov(t_data *data, t_direction dir);
+void	set_direction(t_data *data, t_direction dir);
+void	unset_direction(t_data *data, t_direction dir);
 
 // map_walls.c
 int		is_next_step_a_wall(t_data *data, double dir_rad);
-t_wall	get_distance_to_wall(t_data *data, double x, double y, double dir_deg, int depth);
+t_wall	get_next_wall(t_data *data, double x, double y, double dir_deg);
 int		is_coord_a_wall(t_data *data, double x, double y);
+double	get_distance_to_wall(t_data *data, t_wall *wall, double dir_rad);
 
 // map_render.c
 int		render(t_data *data);
 void	render_map(t_data *data);
+
+// map_render_walls.c
+void	render_walls(t_data *data);
 
 // mlx_utils.c
 void	draw_pixel(t_mlx *mlx, int x, int y, int color);
