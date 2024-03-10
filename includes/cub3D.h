@@ -6,7 +6,7 @@
 /*   By: afidalgo <afidalgo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:05:05 by alvicina          #+#    #+#             */
-/*   Updated: 2024/03/08 17:37:49 by afidalgo         ###   ########.fr       */
+/*   Updated: 2024/03/10 10:27:28 by afidalgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,31 @@
 # define KEY_DOWN 125
 # define KEY_UP 126
 
+# define ON_KEYDOWN 2
+# define ON_KEYUP 3
+# define ON_DESTROY 17
+
 # define MOVE_SPEED 10
 # define TURN_SPEED 5
 
 # define PI 3.1415926535897932384626
 
+typedef enum e_direction
+{
+	LEFT = 1,
+	RIGHT,
+	FORWARD,
+	BACKWARD
+}	t_direction;
+
 typedef struct s_player
 {
-	int	x;
-	int	y;
-	int	dir;
-}		t_player;
+	int			x;
+	int			y;
+	int			dir;
+	t_direction	directions[2];
+	t_direction	movement[4];
+}				t_player;
 
 typedef struct s_img_data
 {
@@ -89,7 +103,7 @@ typedef struct s_data
 
 typedef enum e_texture_dir
 {
-	NORTH,
+	NORTH = 1,
 	EAST,
 	SOUTH,
 	WEST
@@ -101,14 +115,6 @@ typedef struct s_wall
 	double			y;
 	t_texture_dir	dir;
 }					t_wall;
-
-typedef enum e_direction
-{
-	LEFT,
-	RIGHT,
-	FORWARD,
-	BACKWARD
-}	t_direction;
 
 // modulo utils_copy_file_map_position
 void	ft_message(char *str);
@@ -171,6 +177,7 @@ t_wall	get_distance_to_wall(t_data *data, double x, double y, double dir_deg, in
 int		is_coord_a_wall(t_data *data, double x, double y);
 
 // map_render.c
+int		render(t_data *data);
 void	render_map(t_data *data);
 
 // mlx_utils.c
