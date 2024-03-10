@@ -6,7 +6,7 @@
 /*   By: afidalgo <afidalgo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 09:54:57 by afidalgo          #+#    #+#             */
-/*   Updated: 2024/03/09 11:10:24 by afidalgo         ###   ########.fr       */
+/*   Updated: 2024/03/10 10:28:06 by afidalgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,25 @@
 static void	render_ceiling(t_data *data);
 static void	render_floor(t_data *data);
 static void	render_walls(t_data *data);
+
+int	render(t_data *data)
+{
+	if (data->player->directions[1] != 0)
+		turn_pov(data, data->player->directions[1]);
+	else if (data->player->directions[0] != 0)
+		turn_pov(data, data->player->directions[0]);
+	if (data->player->movement[0] != 0)
+		move(data, data->player->movement[0]);
+	else if (data->player->movement[1] != 0)
+		move(data, data->player->movement[1]);
+	else if (data->player->movement[2] != 0)
+		move(data, data->player->movement[2]);
+	else if (data->player->movement[3] != 0)
+		move(data, data->player->movement[3]);
+	printf("(x, y, dir) = (%d, %d, %d)\n", data->player->x, data->player->y, data->player->dir);
+	render_map(data);
+	return (0);
+}
 
 void	render_map(t_data *data)
 {

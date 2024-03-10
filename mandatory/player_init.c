@@ -6,7 +6,7 @@
 /*   By: afidalgo <afidalgo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 19:29:14 by afidalgo          #+#    #+#             */
-/*   Updated: 2024/03/09 09:58:21 by afidalgo         ###   ########.fr       */
+/*   Updated: 2024/03/09 11:36:02 by afidalgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,12 @@ int	init_player(t_data *data)
 	data->player = malloc(sizeof(t_player));
 	if (data->player == NULL)
 		return (EXIT_FAILURE);
+	data->player->directions[0] = 0;
+	data->player->directions[1] = 0;
+	data->player->movement[0] = 0;
+	data->player->movement[1] = 0;
+	data->player->movement[2] = 0;
+	data->player->movement[3] = 0;
 	i = 0;
 	while (data->map_only[i])
 	{
