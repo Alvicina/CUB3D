@@ -6,7 +6,7 @@
 #    By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/15 16:37:55 by alvicina          #+#    #+#              #
-#    Updated: 2024/03/10 12:22:06 by alvicina         ###   ########.fr        #
+#    Updated: 2024/03/10 12:44:49 by alvicina         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@
 NAME            = cub3D
 CC              = gcc
 RM              = rm -rf
-FLAGS           = -Wall -Wextra -Werror -Ilibft -Imlx  -g3 -fsanitize=address
+FLAGS           = -Wall -Wextra -Werror -Ilibft -Imlx  #-g3 -fsanitize=address
 
 #FILES AND PATH
 

@@ -6,7 +6,7 @@
 /*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 19:35:35 by afidalgo          #+#    #+#             */
-/*   Updated: 2024/03/10 12:37:06 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/03/10 12:44:08 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,13 @@ int	init_gui(t_data *data)
 	if (init_img(data->mlx) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	if (charge_textures(data) == EXIT_FAILURE)
+	{
+		mlx_destroy_image(data->mlx->mlx_ptr, data->mlx->img_ptr);
+		mlx_destroy_window(data->mlx->mlx_ptr, data->mlx->win_ptr);
+		free(data->mlx->mlx_ptr);
+		free(data->mlx);
 		return (EXIT_FAILURE);
+	}
 	return (EXIT_SUCCESS);
 }
 

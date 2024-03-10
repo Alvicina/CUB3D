@@ -6,7 +6,7 @@
 /*   By: afidalgo <afidalgo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 19:29:14 by afidalgo          #+#    #+#             */
-/*   Updated: 2024/03/09 09:58:21 by afidalgo         ###   ########.fr       */
+/*   Updated: 2024/03/10 11:11:03 by afidalgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,12 @@ int	init_player(t_data *data)
 	data->player = malloc(sizeof(t_player));
 	if (data->player == NULL)
 		return (EXIT_FAILURE);
+	data->player->directions[0] = 0;
+	data->player->directions[1] = 0;
+	data->player->movement[0] = 0;
+	data->player->movement[1] = 0;
+	data->player->movement[2] = 0;
+	data->player->movement[3] = 0;
 	i = 0;
 	while (data->map_only[i])
 	{
@@ -51,18 +57,24 @@ int	init_player(t_data *data)
 	return (EXIT_SUCCESS);
 }
 
-/*
-int	init_player(t_data *data)
-{
-	data->player = malloc(sizeof(t_player));
-	if (data->player == NULL)
-		return (EXIT_FAILURE);
-	// TODO: Calcular los siguientes valores en base al mapa
-	// data->player->x = 96;
-	// data->player->y = 96;
-	// data->player->dir = 0;
-	data->player->x = 352;
-	data->player->y = 352;
-	data->player->dir = 195;
-	return (EXIT_SUCCESS);
-}*/
+
+// int	init_player(t_data *data)
+// {
+// 	data->player = malloc(sizeof(t_player));
+// 	if (data->player == NULL)
+// 		return (EXIT_FAILURE);
+// 	// TODO: Calcular los siguientes valores en base al mapa
+// 	// data->player->x = 96;
+// 	// data->player->y = 96;
+// 	// data->player->dir = 0;
+// 	data->player->x = 608;
+// 	data->player->y = 224;
+// 	data->player->dir = 140;
+// 	data->player->directions[0] = 0;
+// 	data->player->directions[1] = 0;
+// 	data->player->movement[0] = 0;
+// 	data->player->movement[1] = 0;
+// 	data->player->movement[2] = 0;
+// 	data->player->movement[3] = 0;
+// 	return (EXIT_SUCCESS);
+// }
