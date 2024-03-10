@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+         #
+#    By: afidalgo <afidalgo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/15 16:37:55 by alvicina          #+#    #+#              #
-#    Updated: 2024/03/09 13:42:07 by alvicina         ###   ########.fr        #
+#    Updated: 2024/03/10 10:33:37 by afidalgo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
