@@ -6,7 +6,7 @@
 /*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 11:35:05 by alvicina          #+#    #+#             */
-/*   Updated: 2024/02/27 18:01:48 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/03/09 12:51:31 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int	make_map_square(t_data *data)
 	{
 		square_map[i] = malloc(sizeof(char) * (max_line + 1));
 		if (square_map[i] == NULL)
-			return (EXIT_FAILURE);
+			return (ft_free_pointer_array(square_map), EXIT_FAILURE);
 		i--;
 	}
 	get_new_map(data, square_map, max_line);
