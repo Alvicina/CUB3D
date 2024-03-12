@@ -6,11 +6,13 @@
 /*   By: afidalgo <afidalgo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 09:42:38 by afidalgo          #+#    #+#             */
-/*   Updated: 2024/03/10 13:02:25 by afidalgo         ###   ########.fr       */
+/*   Updated: 2024/03/12 19:51:14 by afidalgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3D.h"
+
+static void	get_wall_based_on_dir(t_wall *wall, t_position *position);
 
 int	is_next_step_a_wall(t_data *data, double dir_rad)
 {
@@ -42,15 +44,17 @@ int	is_coord_a_wall(t_data *data, double x, double y)
 		return (1);
 	if (fmod(x, TILE_LEN) == 0)
 	{
-		if (data->map_only[tile_y][tile_x] == '1' || data->map_only[tile_y][tile_x - 1] == '1')
+		if (data->map_only[tile_y][tile_x] == '1'
+			|| data->map_only[tile_y][tile_x - 1] == '1')
 			return (1);
 	}
 	if (fmod(y, TILE_LEN) == 0)
 	{
-		if (data->map_only[tile_y][tile_x] == '1' || data->map_only[tile_y - 1][tile_x] == '1')
+		if (data->map_only[tile_y][tile_x] == '1'
+			|| data->map_only[tile_y - 1][tile_x] == '1')
 			return (1);
 	}
-	if (fmod(x, TILE_LEN)== 0 && fmod(y, TILE_LEN) == 0)
+	if (fmod(x, TILE_LEN) == 0 && fmod(y, TILE_LEN) == 0)
 	{
 		if (data->map_only[tile_y - 1][tile_x - 1] == '1')
 			return (1);
@@ -60,144 +64,41 @@ int	is_coord_a_wall(t_data *data, double x, double y)
 
 t_wall	get_next_wall(t_data *data, double x, double y, double dir_deg)
 {
-	double	dir_rad;
-	double	distance_top;
-	double	distance_bottom;
-	double	distance_left;
-	double	distance_right;
-	double	top_right_angle;
-	double	top_left_angle;
-	double	bottom_left_angle;
-	double	bottom_right_angle;
-	t_wall	wall;
+	t_position	position;
+	t_wall		wall;
 
 	wall.x = -1.0;
 	wall.y = -1.0;
-	if (dir_deg >= 360)
-		dir_deg -= 360;
-	if (dir_deg < 0)
-		dir_deg += 360;
-	dir_rad = deg2rad(dir_deg);
-	distance_top = fmod(y, TILE_LEN);
-	distance_bottom = TILE_LEN - distance_top;
-	distance_left = fmod(x, TILE_LEN);
-	distance_right = TILE_LEN - distance_left;
-	if (fmod(y, TILE_LEN) == 0)
-	{
-		if (dir_deg < 180)
-		{
-			distance_top = TILE_LEN;
-			distance_bottom = 0;
-		}
-		else
-		{
-			distance_top = 0;
-			distance_bottom = TILE_LEN;
-		}
-	}
-	if (fmod (x, TILE_LEN) == 0)
-	{
-		if (dir_deg < 90 || dir_deg > 270)
-		{
-			distance_left = 0;
-			distance_right = TILE_LEN;
-		}
-		else
-		{
-			distance_right = 0;
-			distance_left = TILE_LEN;
-		}
-	}
-	top_right_angle = atan(distance_top / distance_right);
-	top_left_angle = atan(distance_left / distance_top) + deg2rad(90);
-	bottom_left_angle = atan(distance_bottom / distance_left) + deg2rad(180);
-	bottom_right_angle = atan(distance_right / distance_bottom) + deg2rad(270);
-	if (dir_rad == top_right_angle)
-	{
-		wall.y = y - distance_top;
-		wall.x = x + distance_right;
-		//wall.dir = WEST;
-		wall.dir = SOUTH;
-	}
-	else if (dir_rad == top_left_angle)
-	{
-		wall.y = y - distance_top;
-		wall.x = x - distance_left;
-		//wall.dir = SOUTH;
-		wall.dir = EAST;
-	}
-	else if (dir_rad == bottom_left_angle)
-	{
-		wall.y = y + distance_bottom;
-		wall.x = x - distance_left;
-		//wall.dir = EAST;
-		wall.dir = NORTH;
-	}
-	else if (dir_rad == bottom_right_angle)
-	{
-		wall.y = y + distance_bottom;
-		wall.x = x + distance_right;
-		//wall.dir = NORTH;
-		wall.dir = WEST;
-	}
+	get_position(&position, x, y, dir_deg);
+	get_wall_on_square_junction(&wall, &position);
 	if (wall.x == -1.0 || wall.y == -1.0)
-	{
-		if (dir_rad >= bottom_right_angle || dir_rad <= top_right_angle) //* Nos movemos a la derecha.
-		{
-			wall.dir = WEST;
-			wall.x = x + distance_right;
-			if (dir_deg > 180)
-				wall.y = y - (tan(dir_rad) * distance_right); // arriba
-			else
-				wall.y = y + (tan(deg2rad(360 - dir_deg)) * distance_right); // abajo
-		}
-		else if (dir_rad <= top_left_angle) //* Nos movemos hacia arriba.
-		{
-			wall.dir = SOUTH;
-			wall.y = y - distance_top;
-			if (dir_deg > 90)
-				wall.x = x - (tan(deg2rad(dir_deg - 90)) * distance_top);// izquierda
-			else
-				wall.x = x + (tan(deg2rad(90 - dir_deg)) * distance_top); // derecha
-		}
-		else if (dir_rad <= bottom_left_angle) //* Nos movemos a la izquierda.
-		{
-			wall.dir = EAST;
-			wall.x = x - distance_left;
-			if (dir_deg > 180)
-				wall.y = y - (tan(deg2rad(180 - dir_deg)) * distance_left); // arriba
-			else
-				wall.y = y + (tan(deg2rad(dir_deg - 180)) * distance_left); // abajo
-		}
-		else if (dir_rad <= bottom_right_angle) //* Nos movemos hacia abajo.
-		{
-			wall.dir = NORTH;
-			wall.y = y + distance_bottom;
-			if (dir_deg < 270)
-				wall.x = x - (tan(deg2rad(270 - dir_deg)) * distance_bottom); // izquierda
-			else
-				wall.x = x + (tan(deg2rad(dir_deg - 270)) * distance_bottom); // derecha
-		}
-		else
-		{
-			// TODO: Handle error
-			printf("El rayo de luz en direccion %f no se encuentra en el rango de ninguna esquina del cuadrante.", dir_deg);
-			terminate(data);
-		}
-	}
+		get_wall_based_on_dir(&wall, &position);
 	if (is_coord_a_wall(data, wall.x, wall.y))
 		return (wall);
-	return (get_next_wall(data, wall.x, wall.y, dir_deg));
+	return (get_next_wall(data, wall.x, wall.y, position.dir_deg));
+}
+
+static void	get_wall_based_on_dir(t_wall *wall, t_position *position)
+{
+	if (position->dir_rad >= position->bottom_right_angle
+		|| position->dir_rad <= position->top_right_angle)
+		get_wall_west(wall, position);
+	else if (position->dir_rad <= position->top_left_angle)
+		get_wall_south(wall, position);
+	else if (position->dir_rad <= position->bottom_left_angle)
+		get_wall_east(wall, position);
+	else if (position->dir_rad <= position->bottom_right_angle)
+		get_wall_north(wall, position);
 }
 
 double	get_distance_to_wall(t_data *data, t_wall *wall, double dir_rad)
 {
-	double	distance_to_wall_x;
-	double	distance_to_wall_y;
-	double	diagonal_distance;
+	double	wall_distance_x;
+	double	wall_distance_y;
+	double	diag_distance;
 
-	distance_to_wall_x = fabs(data->player->x - wall->x);
-	distance_to_wall_y = fabs(data->player->y - wall->y);
-	diagonal_distance = sqrt(pow(distance_to_wall_x, 2) + pow(distance_to_wall_y, 2));
-	return (cos(fabs(deg2rad(data->player->dir) - dir_rad)) * diagonal_distance);
+	wall_distance_x = fabs(data->player->x - wall->x);
+	wall_distance_y = fabs(data->player->y - wall->y);
+	diag_distance = sqrt(pow(wall_distance_x, 2) + pow(wall_distance_y, 2));
+	return (cos(fabs(deg2rad(data->player->dir) - dir_rad)) * diag_distance);
 }

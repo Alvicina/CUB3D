@@ -6,7 +6,7 @@
 /*   By: afidalgo <afidalgo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 19:29:54 by afidalgo          #+#    #+#             */
-/*   Updated: 2024/03/10 10:17:52 by afidalgo         ###   ########.fr       */
+/*   Updated: 2024/03/12 19:52:46 by afidalgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@ void	move(t_data *data, t_direction dir)
 		move_left(data);
 	else if (dir == RIGHT)
 		move_right(data);
-	// printf("(x, y, dir) = (%d, %d, %d)\n", data->player->x, data->player->y, data->player->dir);
-	// render_map(data);
 }
 
 static void	move_in_dir(t_data *data, double dir_rad)

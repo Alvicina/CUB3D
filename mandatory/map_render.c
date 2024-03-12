@@ -6,7 +6,7 @@
 /*   By: afidalgo <afidalgo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 09:54:57 by afidalgo          #+#    #+#             */
-/*   Updated: 2024/03/10 13:45:43 by afidalgo         ###   ########.fr       */
+/*   Updated: 2024/03/12 18:56:31 by afidalgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,10 @@ void	render_map(t_data *data)
 	render_walls(data);
 	mlx_put_image_to_window(
 		data->mlx->mlx_ptr,
-		data->mlx->win_ptr, 
+		data->mlx->win_ptr,
 		data->mlx->img_ptr,
 		0,
-		0
-	);
+		0);
 }
 
 static void	render_ceiling(t_data *data)

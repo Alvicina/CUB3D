@@ -6,7 +6,7 @@
 /*   By: afidalgo <afidalgo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 12:00:34 by afidalgo          #+#    #+#             */
-/*   Updated: 2024/03/10 13:30:09 by afidalgo         ###   ########.fr       */
+/*   Updated: 2024/03/12 19:27:18 by afidalgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	init_game(t_data *data);
 int	main(int argc, char **argv)
 {
 	t_data	data;
-	
+
 	if (check_number_args(argc))
 		return (EXIT_FAILURE);
 	if (check_arg_name(argv[1]))

@@ -6,7 +6,7 @@
 /*   By: afidalgo <afidalgo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 19:36:15 by afidalgo          #+#    #+#             */
-/*   Updated: 2024/03/10 12:08:36 by afidalgo         ###   ########.fr       */
+/*   Updated: 2024/03/12 18:52:37 by afidalgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ static void	set_movement(t_data *data, t_direction dir)
 		else if (data->player->movement[2] == 0)
 			data->player->movement[2] = dir;
 		else if (data->player->movement[3] == 0)
-			data->player->movement[3] = dir;	
+			data->player->movement[3] = dir;
 	}
 }
 

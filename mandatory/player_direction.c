@@ -6,7 +6,7 @@
 /*   By: afidalgo <afidalgo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 09:41:38 by afidalgo          #+#    #+#             */
-/*   Updated: 2024/03/10 12:08:00 by afidalgo         ###   ########.fr       */
+/*   Updated: 2024/03/12 19:10:57 by afidalgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,8 @@ static void	look_right(t_player *player)
 
 void	set_direction(t_data *data, t_direction dir)
 {
-	if (data->player->directions[0] != dir && data->player->directions[1] != dir)
+	if (data->player->directions[0] != dir
+		&& data->player->directions[1] != dir)
 	{
 		if (data->player->directions[0] == 0)
 			data->player->directions[0] = dir;

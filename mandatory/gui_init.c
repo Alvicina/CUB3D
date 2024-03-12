@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   gui_init.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
+/*   By: afidalgo <afidalgo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 19:35:35 by afidalgo          #+#    #+#             */
-/*   Updated: 2024/03/10 12:44:08 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/03/12 18:53:16 by afidalgo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ static int	charge_textures(t_data *data)
 {
 	size_t	i;
 	int		x;
-	
+
 	x = 64;
 	i = 0;
 	init_textures(data);
@@ -91,7 +91,7 @@ static int	charge_textures(t_data *data)
 	}
 	if (get_addr(data, x))
 		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);	
+	return (EXIT_SUCCESS);
 }
 
 int	get_addr(t_data *data, int x)
@@ -104,5 +104,5 @@ int	get_addr(t_data *data, int x)
 		return (EXIT_FAILURE);
 	if (image_west(data, x))
 		return (EXIT_FAILURE);
-	return (EXIT_SUCCESS);		
+	return (EXIT_SUCCESS);
 }
