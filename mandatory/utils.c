@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afidalgo <afidalgo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 19:23:25 by afidalgo          #+#    #+#             */
-/*   Updated: 2024/03/12 19:21:09 by afidalgo         ###   ########.fr       */
+/*   Updated: 2024/03/15 10:14:37 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,20 @@ double	deg2rad(double deg)
 double	rad2deg(double rad)
 {
 	return (rad * (180 / PI));
+}
+
+int	ft_comp(char c, char *set)
+{
+	size_t	i;
+
+	i = 0;
+	if (!c)
+		return (EXIT_SUCCESS);
+	while (set[i])
+	{
+		if (set[i] == c)
+			return (EXIT_SUCCESS);
+		i++;
+	}
+	return (EXIT_FAILURE);
 }
