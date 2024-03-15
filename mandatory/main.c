@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afidalgo <afidalgo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 12:00:34 by afidalgo          #+#    #+#             */
-/*   Updated: 2024/03/12 19:27:18 by afidalgo         ###   ########.fr       */
+/*   Updated: 2024/03/15 11:32:48 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,21 +32,21 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	}
 	if (init_game(&data) == EXIT_FAILURE)
-	{
-		ft_free_pointer_array(data.textures);
-		ft_free_pointer_array(data.map_only);
-		ft_free_pointer_array(data.map_spec);
-	}
+		return (EXIT_FAILURE);
+	//TODO: si nos queremos salir por aqui sin entrar en renderizado hay que liberar los
+	// los 3 arrays de punteros.
 	return (EXIT_SUCCESS);
 }
 
 static int	init_game(t_data *data)
 {
 	if (init_gui(data) == EXIT_FAILURE)
+	//TODO: quitar free_massive y sustituir por exit
 		return (EXIT_FAILURE);
 	set_event_hooks(data);
 	if (init_player(data) == EXIT_FAILURE)
 	{
+		//TODO: quitar free_massive y sustituir por exit
 		free_massive(data);
 		return (EXIT_FAILURE);
 	}

@@ -6,7 +6,7 @@
 /*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 19:23:25 by afidalgo          #+#    #+#             */
-/*   Updated: 2024/03/15 10:14:37 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/03/15 11:30:24 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ void	free_massive(t_data *data)
 
 int	terminate(t_data *data)
 {
+	//TODO: quitar free_massive y sustituir por exit
 	free_massive(data);
 	exit(EXIT_SUCCESS);
 }
