@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_walls.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afidalgo <afidalgo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alejandro <alejandro@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/03 09:42:38 by afidalgo          #+#    #+#             */
-/*   Updated: 2024/03/12 19:51:14 by afidalgo         ###   ########.fr       */
+/*   Updated: 2024/03/17 13:21:33 by alejandro        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ int	is_next_step_a_wall(t_data *data, double dir_rad)
 {
 	int	new_x;
 	int	new_y;
-	int	tile_x;
-	int	tile_y;
+	//int	tile_x;
+	//int	tile_y;
 
 	new_x = data->player->x + round(cos(dir_rad) * MOVE_SPEED);
 	new_y = data->player->y - round(sin(dir_rad) * MOVE_SPEED);
-	tile_x = new_x / TILE_LEN;
-	tile_y = new_y / TILE_LEN;
+	//tile_x = new_x / TILE_LEN;
+	//tile_y = new_y / TILE_LEN;
 	if (is_coord_a_wall(data, new_x, new_y))
 	{
 		printf("Te has chocado\n");
