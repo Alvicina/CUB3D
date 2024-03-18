@@ -6,7 +6,7 @@
 /*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 12:00:34 by afidalgo          #+#    #+#             */
-/*   Updated: 2024/03/15 11:32:48 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/03/18 09:36:40 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,20 +33,16 @@ int	main(int argc, char **argv)
 	}
 	if (init_game(&data) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	//TODO: si nos queremos salir por aqui sin entrar en renderizado hay que liberar los
-	// los 3 arrays de punteros.
 	return (EXIT_SUCCESS);
 }
 
 static int	init_game(t_data *data)
 {
 	if (init_gui(data) == EXIT_FAILURE)
-	//TODO: quitar free_massive y sustituir por exit
 		return (EXIT_FAILURE);
 	set_event_hooks(data);
 	if (init_player(data) == EXIT_FAILURE)
 	{
-		//TODO: quitar free_massive y sustituir por exit
 		free_massive(data);
 		return (EXIT_FAILURE);
 	}
