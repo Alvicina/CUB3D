@@ -6,7 +6,7 @@
 /*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/27 19:23:25 by afidalgo          #+#    #+#             */
-/*   Updated: 2024/03/18 09:54:19 by alvicina         ###   ########.fr       */
+/*   Updated: 2024/03/20 19:43:44 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ void	free_massive(t_data *data)
 	ft_free_pointer_array(data->textures);
 	ft_free_pointer_array(data->map_only);
 	ft_free_pointer_array(data->map_spec);
-	free(data->mlx->img_ptr);
-	//data->mlx->img_ptr = NULL;
 	mlx_destroy_image(data->mlx->mlx_ptr, data->mlx->img_ptr);
 	mlx_destroy_image(data->mlx->mlx_ptr, data->mlx->n_img);
 	mlx_destroy_image(data->mlx->mlx_ptr, data->mlx->s_img);
