@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3D.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afidalgo <afidalgo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 10:05:05 by alvicina          #+#    #+#             */
-/*   Updated: 2024/03/12 19:51:20 by afidalgo         ###   ########.fr       */
+/*   Updated: 2024/03/15 10:15:06 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,6 +228,7 @@ int		terminate(t_data *data);
 double	deg2rad(double deg);
 double	rad2deg(double rad);
 void	free_massive(t_data *data);
+int		ft_comp(char c, char *set);
 
 // gui_init_utils.c 
 int		set_texture(char *texture, t_data *data);

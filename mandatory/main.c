@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: afidalgo <afidalgo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: alvicina <alvicina@student.42urduliz.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/10 12:00:34 by afidalgo          #+#    #+#             */
-/*   Updated: 2024/03/12 19:27:18 by afidalgo         ###   ########.fr       */
+/*   Updated: 2024/03/18 09:36:40 by alvicina         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,7 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	}
 	if (init_game(&data) == EXIT_FAILURE)
-	{
-		ft_free_pointer_array(data.textures);
-		ft_free_pointer_array(data.map_only);
-		ft_free_pointer_array(data.map_spec);
-	}
+		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }
 
